@@ -5,7 +5,7 @@ A comprehensive Flutter-based mobile application that connects market health scr
 ## 🏥 App Overview
 
 AfyaLink Market is a mobile health application that bridges the gap between public health screenings at markets and personalized follow-up care. The app serves two main user types:
-![Staff home page](screenshots/dash.png)
+<img src="screenshots/dash.png" alt="Staff home page" width="300" height="600" />
 - **Market Visitors**: Can view their health screening results, track their health progress, and redeem rewards
 - **Health Staff**: Healthcare workers who conduct screenings and record results in the app
 
