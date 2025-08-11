@@ -40,23 +40,26 @@ class ResultsTab extends StatelessWidget {
                     children: [
                       Text(
                         'Health Results',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: AppTheme.darkGrey,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  color: AppTheme.darkGrey,
+                                  fontWeight: FontWeight.w600,
+                                ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: AppTheme.primaryGreen.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
                           '${screenings.length} Results',
-                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: AppTheme.primaryGreen,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    color: AppTheme.primaryGreen,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                         ),
                       ),
                     ],
@@ -141,15 +144,15 @@ class ResultsTab extends StatelessWidget {
         Text(
           value,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: color,
-            fontWeight: FontWeight.bold,
-          ),
+                color: color,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppTheme.darkGrey.withOpacity(0.7),
-          ),
+                color: AppTheme.darkGrey.withOpacity(0.7),
+              ),
         ),
       ],
     );
@@ -170,26 +173,17 @@ class ResultsTab extends StatelessWidget {
           Text(
             'No Results Yet',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: AppTheme.darkGrey.withOpacity(0.7),
-            ),
+                  color: AppTheme.darkGrey.withOpacity(0.7),
+                ),
           ),
           const SizedBox(height: 8),
           Text(
             'Your health screening results will appear here',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppTheme.darkGrey.withOpacity(0.5),
-            ),
+                  color: AppTheme.darkGrey.withOpacity(0.5),
+                ),
             textAlign: TextAlign.center,
           ),
-          // const SizedBox(height: 24),
-          // ElevatedButton.icon(
-          //   onPressed: () {
-          //     // Navigate to add screening or home
-          //     Navigator.pushNamed(context, '/add-screening');
-          //   },
-          //   icon: const Icon(Icons.add),
-          //   label: const Text('Get Screened'),
-          // ),
         ],
       ),
     );
@@ -232,7 +226,7 @@ class _ResultDetailsSheet extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          
+
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
@@ -245,17 +239,17 @@ class _ResultDetailsSheet extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: screening.status == 'abnormal' 
+                          color: screening.status == 'abnormal'
                               ? AppTheme.warningOrange.withOpacity(0.2)
                               : AppTheme.accentGreen.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
-                          screening.status == 'abnormal' 
-                              ? Icons.warning 
+                          screening.status == 'abnormal'
+                              ? Icons.warning
                               : Icons.check_circle,
-                          color: screening.status == 'abnormal' 
-                              ? AppTheme.warningOrange 
+                          color: screening.status == 'abnormal'
+                              ? AppTheme.warningOrange
                               : AppTheme.accentGreen,
                           size: 24,
                         ),
@@ -267,19 +261,25 @@ class _ResultDetailsSheet extends StatelessWidget {
                           children: [
                             Text(
                               screening.testType,
-                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                color: AppTheme.darkGrey,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium
+                                  ?.copyWith(
+                                    color: AppTheme.darkGrey,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                             Text(
                               screening.status.toUpperCase(),
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                color: screening.status == 'abnormal' 
-                                    ? AppTheme.warningOrange 
-                                    : AppTheme.accentGreen,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    color: screening.status == 'abnormal'
+                                        ? AppTheme.warningOrange
+                                        : AppTheme.accentGreen,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                             ),
                           ],
                         ),
@@ -350,19 +350,25 @@ class _ResultDetailsSheet extends StatelessWidget {
                               const SizedBox(width: 8),
                               Text(
                                 'Recommendation',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppTheme.warningOrange,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: AppTheme.warningOrange,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 8),
                           Text(
                             'Please consult with a healthcare provider for further evaluation and treatment.',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppTheme.darkGrey.withOpacity(0.8),
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  color: AppTheme.darkGrey.withOpacity(0.8),
+                                ),
                           ),
                         ],
                       ),
@@ -389,9 +395,9 @@ class _ResultDetailsSheet extends StatelessWidget {
         Text(
           title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: AppTheme.darkGrey,
-            fontWeight: FontWeight.w600,
-          ),
+                color: AppTheme.darkGrey,
+                fontWeight: FontWeight.w600,
+              ),
         ),
         const SizedBox(height: 12),
         ...children,

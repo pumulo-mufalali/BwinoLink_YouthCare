@@ -205,7 +205,7 @@ class DummyData {
   // Get available rewards for user points
   static List<RewardItem> getAvailableRewards(int userPoints) {
     return rewardItems
-        .where((reward) => 
+        .where((reward) =>
             reward.isAvailable && reward.pointsRequired <= userPoints)
         .toList();
   }
