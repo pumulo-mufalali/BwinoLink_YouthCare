@@ -9,38 +9,38 @@ AfyaLink Market is a mobile health application that bridges the gap between publ
 - **Market Visitors**: Can view their health screening results, track their health progress, and redeem rewards
 - **Health Staff**: Healthcare workers who conduct screenings and record results in the app
 
-## ✨ Key Features
+## Key Features
 
-### 🔐 Authentication & User Management
+### Authentication & User Management
 - Phone number-based login system
 - Role-based access control (Visitor/Staff)
 - User profile management
 - Easy role switching for demonstration purposes
 
-### 🏠 Home Dashboard
+### Home Dashboard
 - Personalized welcome screen with user information
 - Health statistics overview (total screenings, abnormal results)
 - Quick action buttons for common tasks
 - Points system display
 
-### 📊 Health Results Management
+### Health Results Management
 - Comprehensive screening results display
 - Filtering by test type, status, and date
 - Detailed result information with notes
 - Abnormal result highlighting
 
-### 🎁 Rewards System
+### Rewards System
 - Points-based reward redemption
 - Health-focused rewards (checkups, supplements, consultations)
 - Progress tracking towards reward goals
 
-### ⚙️ Settings & Configuration
+### Settings & Configuration
 - User profile management
 - Role switching functionality
 - App settings and preferences
 - Logout functionality
 
-### 📝 Screening Management (Staff Only)
+### Screening Management (Staff Only)
 - Add new health screenings
 - Multiple test types support:
   - Blood Pressure
@@ -52,7 +52,7 @@ AfyaLink Market is a mobile health application that bridges the gap between publ
 - Patient information management
 - Result status tracking (Normal/Abnormal/Pending)
 
-## 🏗️ Technical Architecture
+## Technical Architecture
 
 ### Frontend Framework
 - **Flutter**: Cross-platform mobile development
@@ -87,7 +87,7 @@ lib/
 - **Role-based Access**: Different features for different user types
 - **Data Persistence**: Local data management (ready for backend integration)
 
-## 🎨 Design Features
+## Design Features
 
 ### Color Scheme
 - **Primary Green**: Health and wellness focus
@@ -106,7 +106,7 @@ lib/
 - **Interactive Elements**: Touch-friendly buttons and forms
 - **Status Indicators**: Clear visual feedback for health status
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Flutter SDK (3.6.1 or higher)
@@ -130,7 +130,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 ```
 
-## 📱 App Flow
+## App Flow
 
 ### For Market Visitors
 1. **Login**: Enter phone number to access personal health data
@@ -146,7 +146,7 @@ dependencies:
 4. **Track Impact**: Monitor community health improvements
 5. **Support Follow-up**: Ensure proper care coordination
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 ### Backend Integration
 - **API Integration**: Connect to health information systems
@@ -166,7 +166,7 @@ dependencies:
 - **Reporting Tools**: Healthcare provider reports
 - **Data Export**: Secure data sharing capabilities
 
-## 🧪 Testing
+## Testing
 
 The app includes comprehensive testing:
 - **Unit Tests**: Core functionality validation
@@ -175,18 +175,18 @@ The app includes comprehensive testing:
 
 Run tests with: `flutter test`
 
-## 📄 License
+## License
 
 This project is developed as a prototype for demonstration purposes.
 
-## 🤝 Contributing
+## Contributing
 
 This is a prototype application. For production use, additional security, testing, and compliance measures would be required.
 
-## 📞 Support
+## Support
 
 For questions or support regarding this prototype, please refer to the project documentation or contact the development team.
 
 ---
 
-**AfyaLink Market** - Connecting Health, Empowering Communities 🌟
+**AfyaLink Market** - Connecting Health, Empowering Communities
