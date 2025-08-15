@@ -1,6 +1,3 @@
-// Main home screen with bottom navigation for AfyaLink Market app
-// Contains tabs: Home, Results, Rewards, Settings
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
@@ -60,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  appState.currentUser?.role == 'staff' ? 'Staff' : 'Visitor',
+                  appState.currentUser?.role == 'staff' ? 'Staff' : 'User',
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: AppTheme.white,
                     fontWeight: FontWeight.w600,

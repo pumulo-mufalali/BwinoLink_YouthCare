@@ -8,8 +8,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
-import 'package:vsla/main.dart';
-import 'package:vsla/providers/app_state.dart';
+import 'package:afyalink/main.dart';
+import 'package:afyalink/providers/app_state.dart';
 
 void main() {
   testWidgets('AfyaLink app smoke test', (WidgetTester tester) async {
@@ -21,7 +21,8 @@ void main() {
       ),
     );
 
-    // Verify that the app loads with the login screen
-    expect(find.text('AfyaLink Market'), findsOneWidget);
+    // Verify that the app loads with the splash screen
+    expect(find.text('AfyaLink'), findsOneWidget);
+    expect(find.text('Your Health, Our Priority'), findsOneWidget);
   });
 }

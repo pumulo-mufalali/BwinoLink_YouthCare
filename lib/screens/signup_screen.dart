@@ -2,27 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
 import '../theme/app_theme.dart';
+import '../data/dummy_data.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
+  String _selectedRole = 'user';
   bool _isLoading = false;
 
   @override
   void dispose() {
+    _nameController.dispose();
     _phoneController.dispose();
     super.dispose();
   }
 
-  // Handle login submission
-  void _handleLogin() async {
+  // Handle signup submission
+  void _handleSignup() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
@@ -31,16 +35,31 @@ class _LoginScreenState extends State<LoginScreen> {
       try {
         // Simulate network delay
         await Future.delayed(const Duration(seconds: 1));
+        
+        // Create new user profile
+        final newUser = UserProfile(
+          name: _nameController.text.trim(),
+          phoneNumber: _phoneController.text.trim(),
+          role: _selectedRole,
+          points: 0, // New users start with 0 points
+        );
 
-        // Login using provider
+        // Create user and login using AppState
         if (mounted) {
-          context.read<AppState>().login(_phoneController.text);
+          context.read<AppState>().createUserAndLogin(newUser);
+          
+          // Navigate to home page
+          Navigator.pushNamedAndRemoveUntil(
+            context, 
+            '/home', 
+            (route) => false
+          );
         }
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Login failed: $e'),
+              content: Text('Signup failed: $e'),
               backgroundColor: AppTheme.errorRed,
             ),
           );
@@ -50,12 +69,6 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             _isLoading = false;
           });
-          // Navigate to home page
-          Navigator.pushNamedAndRemoveUntil(
-              context,
-              '/home',
-                  (route) => false
-          );
         }
       }
     }
@@ -65,6 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.lightGrey,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppTheme.primaryGreen),
+          onPressed: () => Navigator.pop(context),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -78,35 +99,35 @@ class _LoginScreenState extends State<LoginScreen> {
                 Column(
                   children: [
                     Container(
-                      width: 120,
-                      height: 120,
+                      width: 100,
+                      height: 100,
                       decoration: BoxDecoration(
                         color: AppTheme.primaryGreen,
-                        borderRadius: BorderRadius.circular(60),
+                        borderRadius: BorderRadius.circular(50),
                         boxShadow: [
                           BoxShadow(
                             color: AppTheme.primaryGreen.withOpacity(0.3),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
+                            blurRadius: 15,
+                            offset: const Offset(0, 8),
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.health_and_safety,
-                        size: 60,
+                        Icons.person_add,
+                        size: 50,
                         color: AppTheme.white,
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
                     Text(
-                      'AfyaLink',
-                      style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      'Create Account',
+                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         color: AppTheme.primaryGreen,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Connecting Health to Markets',
+                      'Join AfyaLink today',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppTheme.darkGrey.withOpacity(0.7),
                       ),
@@ -115,9 +136,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 
-                const SizedBox(height: 48),
+                const SizedBox(height: 40),
                 
-                // Login form
+                // Signup form
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
@@ -125,19 +146,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          'Welcome Back',
+                          'Sign Up',
                           style: Theme.of(context).textTheme.headlineMedium,
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Enter your Zambian 10-digit phone number to continue',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppTheme.darkGrey.withOpacity(0.7),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
                         const SizedBox(height: 24),
+                        
+                        // Full name input
+                        TextFormField(
+                          controller: _nameController,
+                          keyboardType: TextInputType.name,
+                          textCapitalization: TextCapitalization.words,
+                          decoration: const InputDecoration(
+                            labelText: 'Full Name',
+                            hintText: 'Enter your full name',
+                            prefixIcon: Icon(Icons.person),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your name';
+                            }
+                            if (value.trim().length < 2) {
+                              return 'Name must be at least 2 characters';
+                            }
+                            return null;
+                          },
+                        ),
+                        
+                        const SizedBox(height: 20),
                         
                         // Phone number input
                         TextFormField(
@@ -146,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           maxLength: 10,
                           decoration: const InputDecoration(
                             labelText: 'Phone Number',
-                            hintText: '0764899100',
+                            hintText: '0712345678',
                             prefixIcon: Icon(Icons.phone),
                             counterText: '',
                           ),
@@ -160,17 +196,45 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
                               return 'Phone number must contain only digits';
                             }
+                            // Check if phone number already exists
+                            if (DummyData.users.any((user) => user.phoneNumber == value)) {
+                              return 'Phone number already registered';
+                            }
                             return null;
+                          },
+                        ),
+                        
+                        const SizedBox(height: 20),
+                        
+                        // Role selection
+                        DropdownButtonFormField<String>(
+                          value: _selectedRole,
+                          decoration: const InputDecoration(
+                            labelText: 'Account Type',
+                            prefixIcon: Icon(Icons.work),
+                          ),
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'user',
+                              child: Text('User'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'staff',
+                              child: Text('Staff'),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedRole = value!;
+                            });
                           },
                         ),
                         
                         const SizedBox(height: 24),
                         
-                        // Login button
+                        // Signup button
                         ElevatedButton(
-                          onPressed: () {
-                            _isLoading ? null : _handleLogin();
-                          },
+                          onPressed: _isLoading ? null : _handleSignup,
                           child: _isLoading
                               ? const SizedBox(
                                   height: 20,
@@ -182,27 +246,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 )
-                              : const Text('Continue'),
+                              : const Text('Create Account'),
                         ),
                         
                         const SizedBox(height: 16),
                         
-                        // Sign up link
+                        // Login link
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Don't have an account?",
+                              'Already have an account? ',
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 color: AppTheme.darkGrey.withOpacity(0.7),
                               ),
                             ),
                             TextButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/signup');
+                                Navigator.pop(context);
                               },
                               child: Text(
-                                'Sign Up',
+                                'Login',
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                   color: AppTheme.primaryGreen,
                                   fontWeight: FontWeight.w600,
@@ -210,49 +274,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ],
-                        ),
-                        
-                        const SizedBox(height: 16),
-                        
-                        // Demo info
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: AppTheme.lightBlue.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: AppTheme.secondaryBlue.withOpacity(0.3),
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.info_outline,
-                                    color: AppTheme.secondaryBlue,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    'Demo Mode',
-                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      color: AppTheme.secondaryBlue,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Enter any 10-digit number to login. The app will use dummy data for demonstration.',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: AppTheme.secondaryBlue.withOpacity(0.8),
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
                         ),
                       ],
                     ),
@@ -263,7 +284,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 
                 // Footer
                 Text(
-                  'Your health, our priority',
+                  'Your health journey starts here',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppTheme.darkGrey.withOpacity(0.6),
                   ),

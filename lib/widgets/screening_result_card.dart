@@ -1,6 +1,3 @@
-// Screening result card widget for AfyaLink Market app
-// Displays individual screening results in a card format
-
 import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 import '../theme/app_theme.dart';
@@ -120,7 +117,7 @@ class ScreeningResultCard extends StatelessWidget {
                 ),
               ),
               
-              // Patient info (for champions)
+              // Patient info (for staff)
               if (screening.patientName != screening.patientPhone) ...[
                 const SizedBox(height: 12),
                 Row(

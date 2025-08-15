@@ -1,6 +1,3 @@
-// App state management using Provider
-// This file manages the global state of the AfyaLink Market app
-
 import 'package:flutter/material.dart';
 import '../data/dummy_data.dart';
 
@@ -32,15 +29,11 @@ class AppState extends ChangeNotifier {
 
   // Initialize app data
   void _initializeData() {
-    // Set default user (John Doe - visitor)
-    _currentUser = DummyData.currentUser;
-    _isLoggedIn = true;
+    // Start with no user logged in - show login screen first
+    _currentUser = null;
+    _isLoggedIn = false;
     
-    // Load user screenings
-    _loadUserScreenings();
-    
-    // Load available rewards
-    _loadAvailableRewards();
+    // Don't load data until user logs in
   }
 
   // Login with phone number (simplified for demo)
@@ -57,13 +50,26 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Create new user and login (for signup)
+  void createUserAndLogin(UserProfile newUser) {
+    // Add user to dummy data (in a real app, this would be sent to backend)
+    DummyData.users.add(newUser);
+    
+    // Set as current user and login
+    _currentUser = newUser;
+    _isLoggedIn = true;
+    _loadUserScreenings();
+    _loadAvailableRewards();
+    notifyListeners();
+  }
+
   // Logout
   void logout() {
     _currentUser = null;
     _isLoggedIn = false;
     _userScreenings.clear();
     _availableRewards.clear();
-    _currentScreenIndex = 0;
+    // _currentScreenIndex = 0;
     notifyListeners();
   }
 
@@ -76,11 +82,11 @@ class AppState extends ChangeNotifier {
   // Load user screenings based on current user
   void _loadUserScreenings() {
     if (_currentUser != null) {
-      if (_currentUser!.role == 'visitor') {
-        // For visitors, show screenings with their phone number
+          if (_currentUser!.role == 'user') {
+      // For users, show screenings with their phone number
         _userScreenings = DummyData.getScreeningsByPhone(_currentUser!.phoneNumber);
       } else {
-        // For champions, show all screenings they've recorded
+        // For staff, show all screenings they've recorded
         _userScreenings = DummyData.screeningResults;
       }
     }
@@ -93,7 +99,7 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  // Add new screening (for champions)
+      // Add new screening (for staff)
   void addScreening(ScreeningResult screening) {
     // In a real app, this would be sent to backend
     // For demo, we'll add to our local list

@@ -60,13 +60,13 @@ class SettingsTab extends StatelessWidget {
                                   margin: const EdgeInsets.only(top: 8),
                                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                   decoration: BoxDecoration(
-                                    color: user.role == 'champion' 
+                                    color: user.role == 'staff' 
                                         ? AppTheme.secondaryBlue 
                                         : AppTheme.accentGreen,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Text(
-                                    user.role == 'champion' ? 'Health Champion' : 'Market Visitor',
+                                    user.role == 'staff' ? 'Staff' : 'User',
                                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                                       color: AppTheme.white,
                                       fontWeight: FontWeight.w600,
@@ -152,17 +152,17 @@ class SettingsTab extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () => appState.switchUserRole('visitor'),
+                              onPressed: () => appState.switchUserRole('user'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: user.role == 'visitor' 
+                                backgroundColor: user.role == 'user' 
                                     ? AppTheme.primaryGreen 
                                     : AppTheme.lightGrey,
-                                foregroundColor: user.role == 'visitor' 
+                                foregroundColor: user.role == 'user' 
                                     ? AppTheme.white 
                                     : AppTheme.darkGrey,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                               ),
-                              child: const Text('Market Visitor'),
+                              child: const Text('User'),
                             ),
                           ),
                           const SizedBox(width: 12),
@@ -178,7 +178,7 @@ class SettingsTab extends StatelessWidget {
                                     : AppTheme.darkGrey,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                               ),
-                              child: const Text('Health Champion'),
+                              child: const Text('Staff'),
                             ),
                           ),
                         ],
@@ -255,8 +255,8 @@ class SettingsTab extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    appState.logout();
+                  onPressed: () => {
+                    appState.logout()
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.errorRed,

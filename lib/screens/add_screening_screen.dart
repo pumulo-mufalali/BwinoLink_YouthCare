@@ -145,7 +145,7 @@ class _AddScreeningScreenState extends State<AddScreeningScreen> {
                                           ),
                                     ),
                                     Text(
-                                      'Add a new health screening result for a market visitor',
+                                      'Add a new health screening result for a user',
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium

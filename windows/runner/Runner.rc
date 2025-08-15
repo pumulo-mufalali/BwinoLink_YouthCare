@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "vsla" "\0"
+            VALUE "FileDescription", "AfyaLink" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "vsla" "\0"
+            VALUE "InternalName", "AfyaLink" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "vsla.exe" "\0"
-            VALUE "ProductName", "vsla" "\0"
+            VALUE "OriginalFilename", "AfyaLink.exe" "\0"
+            VALUE "ProductName", "AfyaLink" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

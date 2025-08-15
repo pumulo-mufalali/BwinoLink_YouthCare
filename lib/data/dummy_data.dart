@@ -2,7 +2,7 @@
 class UserProfile {
   final String name;
   final String phoneNumber;
-  final String role; // 'visitor' or 'champion'
+  final String role; // 'user' or 'staff'
   final int points;
   final String profileImage;
 
@@ -63,15 +63,21 @@ class DummyData {
   static final List<UserProfile> users = [
     UserProfile(
       name: 'Waku Nabiwa',
-      phoneNumber: '+260967839012',
-      role: 'visitor',
+      phoneNumber: '0967839012',
+      role: 'user',
       points: 150,
     ),
     UserProfile(
       name: 'Dr. Simataa Mutafela',
-      phoneNumber: '+260767839012',
+      phoneNumber: '0767839012',
       role: 'staff',
       points: 450,
+    ),
+    UserProfile(
+      name: 'Demo User',
+      phoneNumber: '1234567890',
+      role: 'user',
+      points: 100,
     ),
   ];
 
@@ -80,7 +86,7 @@ class DummyData {
     ScreeningResult(
       id: '1',
       patientName: 'Alice Kakula',
-      patientPhone: '+260971217311',
+      patientPhone: '0971217311',
       testType: 'Blood Pressure',
       result: '120/80 mmHg',
       date: DateTime.now().subtract(const Duration(days: 2)),
@@ -90,7 +96,7 @@ class DummyData {
     ScreeningResult(
       id: '2',
       patientName: 'Robert Chungu',
-      patientPhone: '+260971217311',
+      patientPhone: '0971217311',
       testType: 'Blood Sugar',
       result: '180 mg/dL',
       date: DateTime.now().subtract(const Duration(days: 1)),
@@ -100,7 +106,7 @@ class DummyData {
     ScreeningResult(
       id: '3',
       patientName: 'Carol Mwangala',
-      patientPhone: '+260971217311',
+      patientPhone: '0971217311',
       testType: 'BMI',
       result: '28.5',
       date: DateTime.now().subtract(const Duration(days: 3)),
@@ -110,7 +116,7 @@ class DummyData {
     ScreeningResult(
       id: '4',
       patientName: 'David Lubasi',
-      patientPhone: '+260971217311',
+      patientPhone: '0971217311',
       testType: 'Blood Pressure',
       result: '110/70 mmHg',
       date: DateTime.now().subtract(const Duration(days: 5)),
@@ -120,12 +126,22 @@ class DummyData {
     ScreeningResult(
       id: '5',
       patientName: 'Eve Namukolo',
-      patientPhone: '+260971217311',
+      patientPhone: '0971217311',
       testType: 'Blood Sugar',
       result: '95 mg/dL',
       date: DateTime.now().subtract(const Duration(days: 4)),
       status: 'normal',
       notes: 'Normal fasting blood sugar levels.',
+    ),
+    ScreeningResult(
+      id: '6',
+      patientName: 'Demo User',
+      patientPhone: '1234567890',
+      testType: 'Blood Pressure',
+      result: '118/75 mmHg',
+      date: DateTime.now().subtract(const Duration(days: 1)),
+      status: 'normal',
+      notes: 'Good blood pressure readings.',
     ),
   ];
 

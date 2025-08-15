@@ -10,7 +10,7 @@ AfyaLink Market is a mobile health application that bridges the gap between publ
   <img src="screenshots/dash.png" alt="Staff home page" width="250" height="500" />
 </p>
 
-- **Market Visitors**: Can view their health screening results, track their health progress, and redeem rewards
+- **Users**: Can view their health screening results, track their health progress, and redeem rewards
 - **Health Staff**: Healthcare workers who conduct screenings and record results in the app
 
 
@@ -18,7 +18,7 @@ AfyaLink Market is a mobile health application that bridges the gap between publ
 
 ### Authentication & User Management
 - Phone number-based login system
-- Role-based access control (Visitor/Staff)
+- Role-based access control (User/Staff)
 - User profile management
 - Easy role switching for demonstration purposes
 
@@ -137,7 +137,7 @@ dependencies:
 
 ## App Flow
 
-### For Market Visitors
+### For Users
 1. **Login**: Enter phone number to access personal health data
 2. **View Results**: Check health screening results and history
 3. **Track Progress**: Monitor health improvements over time

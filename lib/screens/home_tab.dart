@@ -1,6 +1,3 @@
-// Home tab for AfyaLink Market app
-// Displays welcome message, health statistics, and quick actions
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
@@ -61,7 +58,7 @@ class HomeTab extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  user.role == 'champion' ? 'Health Champion' : 'Market Visitor',
+                                  user.role == 'staff' ? 'Staff' : 'User',
                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: AppTheme.secondaryBlue,
                                     fontWeight: FontWeight.w500,
@@ -241,7 +238,7 @@ class HomeTab extends StatelessWidget {
                       const SizedBox(height: 12),
                       Text(
                         'Regular health screenings can help detect potential health issues early. '
-                        'Visit your local health champion for a quick check-up!',
+                        'Visit your local staff for a quick check-up!',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppTheme.darkGrey.withOpacity(0.8),
                         ),

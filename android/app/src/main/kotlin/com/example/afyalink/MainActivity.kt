@@ -1,4 +1,4 @@
-package com.example.vsla
+package com.example.afyalink
 
 import io.flutter.embedding.android.FlutterActivity
 

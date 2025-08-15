@@ -1,6 +1,6 @@
 {
-    "name": "vsla",
-    "short_name": "vsla",
+      "name": "AfyaLink",
+  "short_name": "AfyaLink",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

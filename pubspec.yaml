@@ -1,4 +1,4 @@
-name: vsla
+name: afyalink
 description: "AfyaLink Market - mHealth app connecting market health screenings to private phone follow-up"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
