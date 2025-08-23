@@ -1,5 +1,5 @@
-name: afyalink
-description: "AfyaLink Market - mHealth app connecting market health screenings to private phone follow-up"
+name: bwino_link_youthcare
+description: "BwinoLink YouthCare - Health where you are — markets & youth spaces connected to clinics privately"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

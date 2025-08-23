@@ -22,6 +22,18 @@ class AppState extends ChangeNotifier {
   List<RewardItem> _availableRewards = [];
   List<RewardItem> get availableRewards => _availableRewards;
 
+  // Health access points
+  List<HealthAccessPoint> _healthAccessPoints = [];
+  List<HealthAccessPoint> get healthAccessPoints => _healthAccessPoints;
+
+  // Peer navigator assignment for current youth
+  PeerNavigatorAssignment? _peerNavigatorAssignment;
+  PeerNavigatorAssignment? get peerNavigatorAssignment => _peerNavigatorAssignment;
+
+  // Achievements for current user
+  List<Achievement> _userAchievements = [];
+  List<Achievement> get userAchievements => _userAchievements;
+
   // Constructor - initialize with default data
   AppState() {
     _initializeData();
@@ -45,8 +57,7 @@ class AppState extends ChangeNotifier {
       orElse: () => DummyData.currentUser,
     );
     _isLoggedIn = true;
-    _loadUserScreenings();
-    _loadAvailableRewards();
+    _loadUserData();
     notifyListeners();
   }
 
@@ -58,8 +69,7 @@ class AppState extends ChangeNotifier {
     // Set as current user and login
     _currentUser = newUser;
     _isLoggedIn = true;
-    _loadUserScreenings();
-    _loadAvailableRewards();
+    _loadUserData();
     notifyListeners();
   }
 
@@ -69,7 +79,9 @@ class AppState extends ChangeNotifier {
     _isLoggedIn = false;
     _userScreenings.clear();
     _availableRewards.clear();
-    // _currentScreenIndex = 0;
+    _healthAccessPoints.clear();
+    _peerNavigatorAssignment = null;
+    _userAchievements.clear();
     notifyListeners();
   }
 
@@ -79,15 +91,37 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Load all user data based on current user
+  void _loadUserData() {
+    if (_currentUser != null) {
+      _loadUserScreenings();
+      _loadAvailableRewards();
+      _loadHealthAccessPoints();
+      _loadPeerNavigatorAssignment();
+      _loadUserAchievements();
+    }
+  }
+
   // Load user screenings based on current user
   void _loadUserScreenings() {
     if (_currentUser != null) {
-          if (_currentUser!.role == 'user') {
-      // For users, show screenings with their phone number
+      if (_currentUser!.role == 'youth') {
+        // For youth, show screenings with their phone number
         _userScreenings = DummyData.getScreeningsByPhone(_currentUser!.phoneNumber);
-      } else {
+      } else if (_currentUser!.role == 'staff') {
         // For staff, show all screenings they've recorded
         _userScreenings = DummyData.screeningResults;
+      } else if (_currentUser!.role == 'peer_navigator') {
+        // For peer navigators, show screenings of assigned youth
+        _userScreenings = DummyData.screeningResults.where((screening) {
+          final assignment = DummyData.getPeerNavigatorAssignment(screening.patientPhone);
+          return assignment?.peerNavigatorId == _currentUser!.phoneNumber;
+        }).toList();
+      } else {
+        // For vendors, show screenings conducted at their location
+        _userScreenings = DummyData.screeningResults.where((screening) {
+          return screening.location == 'market';
+        }).toList();
       }
     }
   }
@@ -99,7 +133,24 @@ class AppState extends ChangeNotifier {
     }
   }
 
-      // Add new screening (for staff)
+  // Load health access points
+  void _loadHealthAccessPoints() {
+    _healthAccessPoints = DummyData.healthAccessPoints;
+  }
+
+  // Load peer navigator assignment for current youth
+  void _loadPeerNavigatorAssignment() {
+    if (_currentUser != null && _currentUser!.role == 'youth') {
+      _peerNavigatorAssignment = DummyData.getPeerNavigatorAssignment(_currentUser!.phoneNumber);
+    }
+  }
+
+  // Load user achievements
+  void _loadUserAchievements() {
+    _userAchievements = DummyData.getUserAchievements();
+  }
+
+  // Add new screening (for staff and peer navigators)
   void addScreening(ScreeningResult screening) {
     // In a real app, this would be sent to backend
     // For demo, we'll add to our local list
@@ -118,19 +169,88 @@ class AppState extends ChangeNotifier {
     final user = DummyData.getUserByRole(role);
     if (user != null) {
       _currentUser = user;
-      _loadUserScreenings();
-      _loadAvailableRewards();
+      _loadUserData();
       notifyListeners();
     }
   }
 
   // Get abnormal results count
   int get abnormalResultsCount {
-    return _userScreenings.where((s) => s.status == 'abnormal').length;
+    return _userScreenings.where((s) => 
+      s.status == 'abnormal' || s.status == 'follow_up_needed'
+    ).length;
   }
 
   // Get total screenings count
   int get totalScreeningsCount {
     return _userScreenings.length;
+  }
+
+  // Get health access points by type
+  List<HealthAccessPoint> getAccessPointsByType(String type) {
+    return _healthAccessPoints.where((point) => point.type == type).toList();
+  }
+
+  // Get nearby health access points (simplified - just return all for demo)
+  List<HealthAccessPoint> getNearbyAccessPoints() {
+    return _healthAccessPoints.where((point) => point.isActive).toList();
+  }
+
+  // Redeem reward
+  void redeemReward(RewardItem reward) {
+    if (_currentUser != null && _currentUser!.points >= reward.pointsRequired) {
+      // In a real app, this would update the backend
+      // For demo, we'll just remove from available rewards
+      _availableRewards.removeWhere((r) => r.id == reward.id);
+      notifyListeners();
+    }
+  }
+
+  // Add points to user (for achievements, screenings, etc.)
+  void addPoints(int points) {
+    if (_currentUser != null) {
+      // In a real app, this would update the backend
+      // For demo, we'll just update the local user
+      final updatedUser = UserProfile(
+        name: _currentUser!.name,
+        phoneNumber: _currentUser!.phoneNumber,
+        role: _currentUser!.role,
+        points: _currentUser!.points + points,
+        age: _currentUser!.age,
+        location: _currentUser!.location,
+        interests: _currentUser!.interests,
+      );
+      _currentUser = updatedUser;
+      _loadAvailableRewards();
+      notifyListeners();
+    }
+  }
+
+  // Check if user is youth
+  bool get isYouth => _currentUser?.role == 'youth';
+
+  // Check if user is staff
+  bool get isStaff => _currentUser?.role == 'staff';
+
+  // Check if user is peer navigator
+  bool get isPeerNavigator => _currentUser?.role == 'peer_navigator';
+
+  // Check if user is vendor
+  bool get isVendor => _currentUser?.role == 'vendor';
+
+  // Get user's role display name
+  String get userRoleDisplayName {
+    switch (_currentUser?.role) {
+      case 'youth':
+        return 'Youth';
+      case 'staff':
+        return 'Health Worker';
+      case 'peer_navigator':
+        return 'Peer Navigator';
+      case 'vendor':
+        return 'Market Vendor';
+      default:
+        return 'User';
+    }
   }
 }

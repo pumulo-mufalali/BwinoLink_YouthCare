@@ -1,10 +1,16 @@
-// User profile dummy data
+// Enhanced data models for BwinoLink YouthCare
+// Supporting youth-focused health services, gamification, and community access points
+
 class UserProfile {
   final String name;
   final String phoneNumber;
-  final String role; // 'user' or 'staff'
+  final String role; // 'youth', 'staff', 'peer_navigator', 'vendor'
   final int points;
   final String profileImage;
+  final int age;
+  final String location;
+  final List<String> interests;
+  final bool isActive;
 
   UserProfile({
     required this.name,
@@ -12,10 +18,14 @@ class UserProfile {
     required this.role,
     required this.points,
     this.profileImage = '',
+    this.age = 0,
+    this.location = '',
+    this.interests = const [],
+    this.isActive = true,
   });
 }
 
-// Health screening result dummy data
+// Enhanced health screening result with youth-focused services
 class ScreeningResult {
   final String id;
   final String patientName;
@@ -23,8 +33,12 @@ class ScreeningResult {
   final String testType;
   final String result;
   final DateTime date;
-  final String status; // 'normal', 'abnormal', 'pending'
+  final String status; // 'normal', 'abnormal', 'pending', 'follow_up_needed'
   final String notes;
+  final String location; // 'market', 'school', 'youth_center', 'clinic'
+  final String conductedBy;
+  final bool requiresFollowUp;
+  final String followUpInstructions;
 
   ScreeningResult({
     required this.id,
@@ -35,10 +49,14 @@ class ScreeningResult {
     required this.date,
     required this.status,
     this.notes = '',
+    this.location = 'clinic',
+    this.conductedBy = '',
+    this.requiresFollowUp = false,
+    this.followUpInstructions = '',
   });
 }
 
-// Reward item dummy data
+// Enhanced reward system with gamification
 class RewardItem {
   final String id;
   final String name;
@@ -46,6 +64,9 @@ class RewardItem {
   final int pointsRequired;
   final String imageUrl;
   final bool isAvailable;
+  final String category; // 'health', 'transport', 'market', 'entertainment'
+  final String redemptionCode;
+  final Duration expiryDuration;
 
   RewardItem({
     required this.id,
@@ -54,34 +75,129 @@ class RewardItem {
     required this.pointsRequired,
     this.imageUrl = '',
     this.isAvailable = true,
+    this.category = 'health',
+    this.redemptionCode = '',
+    this.expiryDuration = const Duration(days: 30),
   });
 }
 
-// Dummy data instances
+// New model for health access points
+class HealthAccessPoint {
+  final String id;
+  final String name;
+  final String type; // 'market', 'school', 'youth_center', 'clinic'
+  final String location;
+  final List<String> services;
+  final String contactPerson;
+  final String phoneNumber;
+  final bool isActive;
+  final Map<String, dynamic> schedule;
+
+  HealthAccessPoint({
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.location,
+    required this.services,
+    required this.contactPerson,
+    required this.phoneNumber,
+    this.isActive = true,
+    this.schedule = const {},
+  });
+}
+
+// New model for peer navigator assignments
+class PeerNavigatorAssignment {
+  final String id;
+  final String youthId;
+  final String peerNavigatorId;
+  final DateTime assignedDate;
+  final String status; // 'active', 'completed', 'discontinued'
+  final List<String> supportAreas;
+  final String notes;
+
+  PeerNavigatorAssignment({
+    required this.id,
+    required this.youthId,
+    required this.peerNavigatorId,
+    required this.assignedDate,
+    this.status = 'active',
+    this.supportAreas = const [],
+    this.notes = '',
+  });
+}
+
+// New model for gamification achievements
+class Achievement {
+  final String id;
+  final String name;
+  final String description;
+  final int pointsRewarded;
+  final String icon;
+  final bool isUnlocked;
+  final DateTime? unlockedDate;
+
+  Achievement({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.pointsRewarded,
+    this.icon = '',
+    this.isUnlocked = false,
+    this.unlockedDate,
+  });
+}
+
+// Enhanced dummy data instances
 class DummyData {
-  // Sample user profiles
+  // Sample user profiles with youth focus
   static final List<UserProfile> users = [
     UserProfile(
       name: 'Waku Nabiwa',
       phoneNumber: '0967839012',
-      role: 'user',
+      role: 'youth',
       points: 150,
+      age: 19,
+      location: 'Lusaka Market Area',
+      interests: ['fitness', 'music', 'health'],
     ),
     UserProfile(
       name: 'Dr. Simataa Mutafela',
       phoneNumber: '0767839012',
       role: 'staff',
       points: 450,
+      age: 35,
+      location: 'Central Clinic',
     ),
     UserProfile(
-      name: 'Demo User',
+      name: 'Sarah Mwamba',
+      phoneNumber: '0971234567',
+      role: 'peer_navigator',
+      points: 320,
+      age: 22,
+      location: 'Youth Center',
+      interests: ['counseling', 'community_health'],
+    ),
+    UserProfile(
+      name: 'John Banda',
+      phoneNumber: '0967890123',
+      role: 'vendor',
+      points: 80,
+      age: 28,
+      location: 'Market Stall 15',
+    ),
+    UserProfile(
+      name: 'Demo Youth',
       phoneNumber: '1234567890',
-      role: 'user',
+      role: 'youth',
       points: 100,
+      age: 18,
+      location: 'Demo Area',
+      interests: ['sports', 'technology'],
     ),
   ];
 
-  // Sample screening results
+  // Enhanced screening results with youth-focused services
   static final List<ScreeningResult> screeningResults = [
     ScreeningResult(
       id: '1',
@@ -92,104 +208,228 @@ class DummyData {
       date: DateTime.now().subtract(const Duration(days: 2)),
       status: 'normal',
       notes: 'Patient shows normal blood pressure readings.',
+      location: 'market',
+      conductedBy: 'Dr. Simataa',
     ),
     ScreeningResult(
       id: '2',
       patientName: 'Robert Chungu',
       patientPhone: '0971217311',
-      testType: 'Blood Sugar',
-      result: '180 mg/dL',
+      testType: 'HIV Self-Test',
+      result: 'Negative',
       date: DateTime.now().subtract(const Duration(days: 1)),
-      status: 'abnormal',
-      notes: 'Elevated blood sugar levels detected. Recommend follow-up.',
+      status: 'normal',
+      notes: 'HIV self-test completed successfully.',
+      location: 'youth_center',
+      conductedBy: 'Sarah Mwamba',
     ),
     ScreeningResult(
       id: '3',
       patientName: 'Carol Mwangala',
       patientPhone: '0971217311',
-      testType: 'BMI',
-      result: '28.5',
+      testType: 'Contraceptive Counseling',
+      result: 'Completed',
       date: DateTime.now().subtract(const Duration(days: 3)),
-      status: 'abnormal',
-      notes: 'Patient is overweight. Suggest dietary consultation.',
+      status: 'normal',
+      notes: 'Patient received comprehensive contraceptive information.',
+      location: 'clinic',
+      conductedBy: 'Dr. Simataa',
     ),
     ScreeningResult(
       id: '4',
       patientName: 'David Lubasi',
       patientPhone: '0971217311',
-      testType: 'Blood Pressure',
-      result: '110/70 mmHg',
+      testType: 'Blood Sugar',
+      result: '180 mg/dL',
       date: DateTime.now().subtract(const Duration(days: 5)),
-      status: 'normal',
-      notes: 'Excellent blood pressure readings.',
+      status: 'abnormal',
+      notes: 'Elevated blood sugar levels detected.',
+      location: 'market',
+      conductedBy: 'Dr. Simataa',
+      requiresFollowUp: true,
+      followUpInstructions: 'Schedule clinic visit within 1 week',
     ),
     ScreeningResult(
       id: '5',
       patientName: 'Eve Namukolo',
       patientPhone: '0971217311',
-      testType: 'Blood Sugar',
-      result: '95 mg/dL',
+      testType: 'Mental Health Screening',
+      result: 'Mild Anxiety',
       date: DateTime.now().subtract(const Duration(days: 4)),
-      status: 'normal',
-      notes: 'Normal fasting blood sugar levels.',
+      status: 'follow_up_needed',
+      notes: 'Patient shows signs of mild anxiety.',
+      location: 'school',
+      conductedBy: 'Sarah Mwamba',
+      requiresFollowUp: true,
+      followUpInstructions: 'Peer navigator assigned for support',
     ),
     ScreeningResult(
       id: '6',
-      patientName: 'Demo User',
+      patientName: 'Demo Youth',
       patientPhone: '1234567890',
-      testType: 'Blood Pressure',
-      result: '118/75 mmHg',
+      testType: 'BMI',
+      result: '22.5',
       date: DateTime.now().subtract(const Duration(days: 1)),
       status: 'normal',
-      notes: 'Good blood pressure readings.',
+      notes: 'Healthy BMI range.',
+      location: 'youth_center',
+      conductedBy: 'Sarah Mwamba',
     ),
   ];
 
-  // Sample reward items
+  // Enhanced reward items with gamification
   static final List<RewardItem> rewardItems = [
     RewardItem(
       id: '1',
       name: 'Free Health Checkup',
       description: 'Complimentary comprehensive health screening',
       pointsRequired: 100,
+      category: 'health',
+      redemptionCode: 'HEALTH100',
     ),
     RewardItem(
       id: '2',
-      name: 'Health Supplements',
-      description: 'Vitamin D and Omega-3 supplements pack',
-      pointsRequired: 200,
+      name: 'Transport Voucher',
+      description: 'K50 transport voucher for clinic visits',
+      pointsRequired: 150,
+      category: 'transport',
+      redemptionCode: 'TRANS150',
     ),
     RewardItem(
       id: '3',
-      name: 'Fitness Tracker',
-      description: 'Smart watch to monitor daily activity',
-      pointsRequired: 500,
+      name: 'Market Food Voucher',
+      description: 'K30 voucher for healthy food at partner markets',
+      pointsRequired: 200,
+      category: 'market',
+      redemptionCode: 'FOOD200',
     ),
     RewardItem(
       id: '4',
-      name: 'Nutrition Consultation',
-      description: '30-minute session with certified nutritionist',
+      name: 'Movie Ticket',
+      description: 'Free movie ticket for stress relief',
       pointsRequired: 300,
+      category: 'entertainment',
+      redemptionCode: 'MOVIE300',
     ),
     RewardItem(
       id: '5',
-      name: 'Gym Membership',
-      description: '1-month access to local fitness center',
-      pointsRequired: 400,
+      name: 'Fitness Tracker',
+      description: 'Smart watch to monitor daily activity',
+      pointsRequired: 500,
+      category: 'health',
+      redemptionCode: 'FIT500',
     ),
   ];
 
-  // Test types available for screenings
+  // Health access points
+  static final List<HealthAccessPoint> healthAccessPoints = [
+    HealthAccessPoint(
+      id: '1',
+      name: 'Lusaka Central Market',
+      type: 'market',
+      location: 'Lusaka CBD',
+      services: ['Blood Pressure', 'Blood Sugar', 'HIV Self-Test', 'BMI'],
+      contactPerson: 'John Banda',
+      phoneNumber: '0967890123',
+      schedule: {
+        'monday': '08:00-16:00',
+        'tuesday': '08:00-16:00',
+        'wednesday': '08:00-16:00',
+        'thursday': '08:00-16:00',
+        'friday': '08:00-16:00',
+      },
+    ),
+    HealthAccessPoint(
+      id: '2',
+      name: 'Youth Empowerment Center',
+      type: 'youth_center',
+      location: 'Kalingalinga',
+      services: ['Mental Health Screening', 'Contraceptive Counseling', 'HIV Self-Test'],
+      contactPerson: 'Sarah Mwamba',
+      phoneNumber: '0971234567',
+      schedule: {
+        'monday': '10:00-18:00',
+        'tuesday': '10:00-18:00',
+        'wednesday': '10:00-18:00',
+        'thursday': '10:00-18:00',
+        'friday': '10:00-18:00',
+        'saturday': '10:00-16:00',
+      },
+    ),
+    HealthAccessPoint(
+      id: '3',
+      name: 'Central Clinic',
+      type: 'clinic',
+      location: 'Lusaka Central',
+      services: ['All Services', 'Follow-up Care', 'Specialist Referrals'],
+      contactPerson: 'Dr. Simataa Mutafela',
+      phoneNumber: '0767839012',
+      schedule: {
+        'monday': '08:00-17:00',
+        'tuesday': '08:00-17:00',
+        'wednesday': '08:00-17:00',
+        'thursday': '08:00-17:00',
+        'friday': '08:00-17:00',
+      },
+    ),
+  ];
+
+  // Peer navigator assignments
+  static final List<PeerNavigatorAssignment> peerNavigatorAssignments = [
+    PeerNavigatorAssignment(
+      id: '1',
+      youthId: '0967839012',
+      peerNavigatorId: '0971234567',
+      assignedDate: DateTime.now().subtract(const Duration(days: 5)),
+      supportAreas: ['mental_health', 'sexual_health'],
+      notes: 'Regular check-ins scheduled',
+    ),
+  ];
+
+  // Achievements for gamification
+  static final List<Achievement> achievements = [
+    Achievement(
+      id: '1',
+      name: 'First Screening',
+      description: 'Complete your first health screening',
+      pointsRewarded: 50,
+      icon: '🎯',
+    ),
+    Achievement(
+      id: '2',
+      name: 'Health Champion',
+      description: 'Complete 5 screenings in a month',
+      pointsRewarded: 100,
+      icon: '🏆',
+    ),
+    Achievement(
+      id: '3',
+      name: 'Peer Supporter',
+      description: 'Help 3 friends join the platform',
+      pointsRewarded: 150,
+      icon: '🤝',
+    ),
+    Achievement(
+      id: '4',
+      name: 'Market Explorer',
+      description: 'Visit 3 different health access points',
+      pointsRewarded: 75,
+      icon: '🏪',
+    ),
+  ];
+
+  // Enhanced test types for youth-focused services
   static final List<String> availableTestTypes = [
     'Blood Pressure',
     'Blood Sugar',
     'BMI',
-    'Cholesterol',
-    'Vision Test',
-    'Hearing Test',
-    'Pulse Rate',
-    'Temperature',
-    'HIV',
+    'HIV Self-Test',
+    'Contraceptive Counseling',
+    'Mental Health Screening',
+    'Pregnancy Test',
+    'STI Information',
+    'Nutrition Assessment',
+    'Physical Activity Check',
   ];
 
   // Get current user (for demo purposes, using first user)
@@ -214,7 +454,7 @@ class DummyData {
   // Get abnormal results
   static List<ScreeningResult> getAbnormalResults() {
     return screeningResults
-        .where((screening) => screening.status == 'abnormal')
+        .where((screening) => screening.status == 'abnormal' || screening.status == 'follow_up_needed')
         .toList();
   }
 
@@ -224,5 +464,27 @@ class DummyData {
         .where((reward) =>
             reward.isAvailable && reward.pointsRequired <= userPoints)
         .toList();
+  }
+
+  // Get health access points by type
+  static List<HealthAccessPoint> getAccessPointsByType(String type) {
+    return healthAccessPoints
+        .where((point) => point.type == type && point.isActive)
+        .toList();
+  }
+
+  // Get peer navigator assignment for youth
+  static PeerNavigatorAssignment? getPeerNavigatorAssignment(String youthId) {
+    try {
+      return peerNavigatorAssignments
+          .firstWhere((assignment) => assignment.youthId == youthId && assignment.status == 'active');
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Get achievements for user
+  static List<Achievement> getUserAchievements() {
+    return achievements;
   }
 }

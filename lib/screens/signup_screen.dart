@@ -82,7 +82,7 @@ class _SignupScreenState extends State<SignupScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppTheme.primaryGreen),
+          icon: const Icon(Icons.arrow_back, color: AppTheme.primaryPurple),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -102,11 +102,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryGreen,
+                        color: AppTheme.primaryPurple,
                         borderRadius: BorderRadius.circular(50),
                         boxShadow: [
                           BoxShadow(
-                            color: AppTheme.primaryGreen.withOpacity(0.3),
+                            color: AppTheme.primaryPurple.withOpacity(0.3),
                             blurRadius: 15,
                             offset: const Offset(0, 8),
                           ),
@@ -122,12 +122,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     Text(
                       'Create Account',
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color: AppTheme.primaryGreen,
+                        color: AppTheme.primaryPurple,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Join AfyaLink today',
+                      'Join BwinoLink YouthCare today',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppTheme.darkGrey.withOpacity(0.7),
                       ),
@@ -215,12 +215,20 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           items: const [
                             DropdownMenuItem(
-                              value: 'user',
-                              child: Text('User'),
+                              value: 'youth',
+                              child: Text('Youth'),
                             ),
                             DropdownMenuItem(
                               value: 'staff',
-                              child: Text('Staff'),
+                              child: Text('Health Worker'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'peer_navigator',
+                              child: Text('Peer Navigator'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'vendor',
+                              child: Text('Market Vendor'),
                             ),
                           ],
                           onChanged: (value) {
@@ -268,7 +276,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               child: Text(
                                 'Login',
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: AppTheme.primaryGreen,
+                                  color: AppTheme.primaryPurple,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),

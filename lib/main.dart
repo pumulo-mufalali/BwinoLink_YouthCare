@@ -9,18 +9,18 @@ import 'screens/home_screen.dart';
 import 'screens/add_screening_screen.dart';
 
 void main() {
-  runApp(const AfyaLinkApp());
+  runApp(const BwinoLinkApp());
 }
 
-class AfyaLinkApp extends StatelessWidget {
-  const AfyaLinkApp({super.key});
+class BwinoLinkApp extends StatelessWidget {
+  const BwinoLinkApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => AppState(),
       child: MaterialApp(
-        title: 'AfyaLink',
+        title: 'BwinoLink YouthCare',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         home: const SplashScreen(),

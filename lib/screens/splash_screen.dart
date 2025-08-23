@@ -67,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.primaryGreen,
+      backgroundColor: AppTheme.primaryPurple,
       body: Center(
         child: AnimatedBuilder(
           animation: _animationController,
@@ -95,31 +95,41 @@ class _SplashScreenState extends State<SplashScreen>
                         ],
                       ),
                       child: Icon(
-                        Icons.health_and_safety,
+                        Icons.favorite,
                         size: 60,
-                        color: AppTheme.primaryGreen,
+                        color: AppTheme.primaryPurple,
                       ),
                     ),
                     const SizedBox(height: 40),
                     
                     // App Name
                     Text(
-                      'AfyaLink',
+                      'BwinoLink YouthCare',
                       style: Theme.of(context).textTheme.displayLarge?.copyWith(
                         color: AppTheme.white,
                         fontWeight: FontWeight.bold,
-                        letterSpacing: 2.0,
+                        letterSpacing: 1.0,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 16),
                     
                     // Tagline
                     Text(
-                      'Your Health, Our Priority',
+                      'Health where you are',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: AppTheme.white.withOpacity(0.9),
                         fontWeight: FontWeight.w300,
                       ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Markets & youth spaces connected to clinics privately',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.white.withOpacity(0.8),
+                        fontWeight: FontWeight.w300,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 60),
                     

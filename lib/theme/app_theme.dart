@@ -1,30 +1,32 @@
-// App theme configuration for AfyaLink Market
-// Uses Material 3 design with health-focused colors
+// App theme configuration for BwinoLink YouthCare
+// Uses Material 3 design with youth-focused colors
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // App color palette
-  static const Color primaryGreen = Color(0xFF2E7D32);
-  static const Color secondaryBlue = Color(0xFF0277BD);
-  static const Color accentGreen = Color(0xFF4CAF50);
-  static const Color lightGreen = Color(0xFF81C784);
+  // App color palette - Youth-focused vibrant colors
+  static const Color primaryPurple = Color(0xFF6A4C93);
+  static const Color secondaryBlue = Color(0xFF2196F3);
+  static const Color accentPink = Color(0xFFE91E63);
+  static const Color lightPurple = Color(0xFFB39DDB);
   static const Color lightBlue = Color(0xFF81D4FA);
   static const Color white = Color(0xFFFFFFFF);
   static const Color lightGrey = Color(0xFFF5F5F5);
   static const Color darkGrey = Color(0xFF424242);
   static const Color errorRed = Color(0xFFD32F2F);
   static const Color warningOrange = Color(0xFFFF9800);
+  static const Color successGreen = Color(0xFF4CAF50);
 
   // Light theme
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: primaryGreen,
+      seedColor: primaryPurple,
       brightness: Brightness.light,
-      primary: primaryGreen,
+      primary: primaryPurple,
       secondary: secondaryBlue,
+      tertiary: accentPink,
       surface: white,
       background: lightGrey,
       error: errorRed,
@@ -111,7 +113,7 @@ class AppTheme {
 
     // App bar theme
     appBarTheme: AppBarTheme(
-      backgroundColor: primaryGreen,
+      backgroundColor: primaryPurple,
       foregroundColor: white,
       elevation: 0,
       centerTitle: true,
@@ -135,10 +137,10 @@ class AppTheme {
     // Elevated button theme
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: primaryGreen,
+        backgroundColor: primaryPurple,
         foregroundColor: white,
         elevation: 2,
-        shadowColor: primaryGreen.withOpacity(0.3),
+        shadowColor: primaryPurple.withOpacity(0.3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -153,8 +155,8 @@ class AppTheme {
     // Outlined button theme
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: primaryGreen,
-        side: const BorderSide(color: primaryGreen, width: 2),
+        foregroundColor: primaryPurple,
+        side: const BorderSide(color: primaryPurple, width: 2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -169,7 +171,7 @@ class AppTheme {
     // Text button theme
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: primaryGreen,
+        foregroundColor: primaryPurple,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -195,7 +197,7 @@ class AppTheme {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: const BorderSide(color: primaryGreen, width: 2),
+        borderSide: const BorderSide(color: primaryPurple, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
@@ -211,7 +213,7 @@ class AppTheme {
     // Bottom navigation bar theme
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: white,
-      selectedItemColor: primaryGreen,
+      selectedItemColor: primaryPurple,
       unselectedItemColor: darkGrey,
       type: BottomNavigationBarType.fixed,
       elevation: 8,
@@ -219,7 +221,7 @@ class AppTheme {
 
     // Floating action button theme
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: primaryGreen,
+      backgroundColor: primaryPurple,
       foregroundColor: white,
       elevation: 6,
       shape: RoundedRectangleBorder(
@@ -229,8 +231,8 @@ class AppTheme {
 
     // Chip theme
     chipTheme: ChipThemeData(
-      backgroundColor: lightGreen.withOpacity(0.2),
-      selectedColor: primaryGreen,
+      backgroundColor: lightPurple.withOpacity(0.2),
+      selectedColor: primaryPurple,
       labelStyle: GoogleFonts.poppins(
         fontSize: 12,
         fontWeight: FontWeight.w500,
@@ -245,9 +247,9 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: primaryGreen,
+      seedColor: primaryPurple,
       brightness: Brightness.dark,
-      primary: lightGreen,
+      primary: lightPurple,
       secondary: lightBlue,
       surface: darkGrey,
       background: const Color(0xFF121212),

@@ -16,48 +16,30 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Widget> _tabs = [
-    const HomeTab(),
-    const ResultsTab(),
-    const RewardsTab(),
-    const SettingsTab(),
-  ];
-
-  final List<String> _tabTitles = [
-    'Home',
-    'Results',
-    'Rewards',
-    'Settings',
-  ];
-
-  final List<IconData> _tabIcons = [
-    Icons.home,
-    Icons.medical_services,
-    Icons.card_giftcard,
-    Icons.settings,
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(
       builder: (context, appState, child) {
+        // Define tabs based on user role
+        final tabs = _getTabsForRole(appState);
+        final tabTitles = _getTabTitlesForRole(appState);
+        final tabIcons = _getTabIconsForRole(appState);
+
         return Scaffold(
           backgroundColor: AppTheme.lightGrey,
           appBar: AppBar(
-            title: Text(_tabTitles[appState.currentScreenIndex]),
+            title: Text(tabTitles[appState.currentScreenIndex]),
             actions: [
               // User role indicator
               Container(
                 margin: const EdgeInsets.only(right: 16),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: appState.currentUser?.role == 'staff' 
-                      ? AppTheme.secondaryBlue 
-                      : AppTheme.accentGreen,
+                  color: _getRoleColor(appState.currentUser?.role),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  appState.currentUser?.role == 'staff' ? 'Staff' : 'User',
+                  appState.userRoleDisplayName,
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     color: AppTheme.white,
                     fontWeight: FontWeight.w600,
@@ -68,38 +50,189 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           body: IndexedStack(
             index: appState.currentScreenIndex,
-            children: _tabs,
+            children: tabs,
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: appState.currentScreenIndex,
             onTap: (index) => appState.setCurrentScreen(index),
             type: BottomNavigationBarType.fixed,
             items: List.generate(
-              _tabIcons.length,
+              tabIcons.length,
               (index) => BottomNavigationBarItem(
-                icon: Icon(_tabIcons[index]),
-                label: _tabTitles[index],
+                icon: Icon(tabIcons[index]),
+                label: tabTitles[index],
               ),
             ),
           ),
-          // Floating action button for adding screenings (only for staff)
-          floatingActionButton: appState.currentUser?.role == 'staff'
-              ? FloatingActionButton.extended(
-                  onPressed: () {
-                    // Navigate to add screening screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddScreeningScreen(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.add),
-                  label: const Text('Add Screening'),
-                )
-              : null,
+          // Floating action button based on user role
+          floatingActionButton: _getFloatingActionButton(appState),
         );
       },
     );
+  }
+
+  // Get tabs based on user role
+  List<Widget> _getTabsForRole(AppState appState) {
+    if (appState.isYouth) {
+      return [
+        const HomeTab(),
+        const ResultsTab(),
+        const RewardsTab(),
+        const SettingsTab(),
+      ];
+    } else if (appState.isStaff) {
+      return [
+        const HomeTab(),
+        const ResultsTab(),
+        const RewardsTab(),
+        const SettingsTab(),
+      ];
+    } else if (appState.isPeerNavigator) {
+      return [
+        const HomeTab(),
+        const ResultsTab(),
+        const RewardsTab(),
+        const SettingsTab(),
+      ];
+    } else if (appState.isVendor) {
+      return [
+        const HomeTab(),
+        const ResultsTab(),
+        const RewardsTab(),
+        const SettingsTab(),
+      ];
+    }
+    return [
+      const HomeTab(),
+      const ResultsTab(),
+      const RewardsTab(),
+      const SettingsTab(),
+    ];
+  }
+
+  // Get tab titles based on user role
+  List<String> _getTabTitlesForRole(AppState appState) {
+    if (appState.isYouth) {
+      return [
+        'My Health',
+        'Results',
+        'Rewards',
+        'Profile',
+      ];
+    } else if (appState.isStaff) {
+      return [
+        'Dashboard',
+        'Screenings',
+        'Rewards',
+        'Settings',
+      ];
+    } else if (appState.isPeerNavigator) {
+      return [
+        'My Youth',
+        'Results',
+        'Rewards',
+        'Profile',
+      ];
+    } else if (appState.isVendor) {
+      return [
+        'Market Health',
+        'Results',
+        'Rewards',
+        'Settings',
+      ];
+    }
+    return [
+      'Home',
+      'Results',
+      'Rewards',
+      'Settings',
+    ];
+  }
+
+  // Get tab icons based on user role
+  List<IconData> _getTabIconsForRole(AppState appState) {
+    if (appState.isYouth) {
+      return [
+        Icons.favorite,
+        Icons.medical_services,
+        Icons.card_giftcard,
+        Icons.person,
+      ];
+    } else if (appState.isStaff) {
+      return [
+        Icons.dashboard,
+        Icons.medical_services,
+        Icons.card_giftcard,
+        Icons.settings,
+      ];
+    } else if (appState.isPeerNavigator) {
+      return [
+        Icons.people,
+        Icons.medical_services,
+        Icons.card_giftcard,
+        Icons.person,
+      ];
+    } else if (appState.isVendor) {
+      return [
+        Icons.store,
+        Icons.medical_services,
+        Icons.card_giftcard,
+        Icons.settings,
+      ];
+    }
+    return [
+      Icons.home,
+      Icons.medical_services,
+      Icons.card_giftcard,
+      Icons.settings,
+    ];
+  }
+
+  // Get role color
+  Color _getRoleColor(String? role) {
+    switch (role) {
+      case 'youth':
+        return AppTheme.accentPink;
+      case 'staff':
+        return AppTheme.secondaryBlue;
+      case 'peer_navigator':
+        return AppTheme.primaryPurple;
+      case 'vendor':
+        return AppTheme.successGreen;
+      default:
+        return AppTheme.primaryPurple;
+    }
+  }
+
+  // Get floating action button based on user role
+  Widget? _getFloatingActionButton(AppState appState) {
+    if (appState.isStaff || appState.isPeerNavigator) {
+      return FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddScreeningScreen(),
+            ),
+          );
+        },
+        icon: const Icon(Icons.add),
+        label: Text(appState.isStaff ? 'Add Screening' : 'Record Health'),
+      );
+    } else if (appState.isVendor) {
+      return FloatingActionButton.extended(
+        onPressed: () {
+          // Navigate to market health services
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Market health services coming soon!'),
+            ),
+          );
+        },
+        icon: const Icon(Icons.health_and_safety),
+        label: const Text('Health Services'),
+      );
+    }
+    return null;
   }
 }

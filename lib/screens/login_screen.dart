@@ -81,32 +81,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: 120,
                       height: 120,
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryGreen,
+                        color: AppTheme.primaryPurple,
                         borderRadius: BorderRadius.circular(60),
                         boxShadow: [
                           BoxShadow(
-                            color: AppTheme.primaryGreen.withOpacity(0.3),
+                            color: AppTheme.primaryPurple.withOpacity(0.3),
                             blurRadius: 20,
                             offset: const Offset(0, 10),
                           ),
                         ],
                       ),
                       child: const Icon(
-                        Icons.health_and_safety,
+                        Icons.favorite,
                         size: 60,
                         color: AppTheme.white,
                       ),
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'AfyaLink',
+                      'BwinoLink YouthCare',
                       style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: AppTheme.primaryGreen,
+                        color: AppTheme.primaryPurple,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Connecting Health to Markets',
+                      'Health where you are — markets & youth spaces connected to clinics privately.',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppTheme.darkGrey.withOpacity(0.7),
                       ),
@@ -125,13 +126,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          'Welcome Back',
+                          'Welcome to YouthCare',
                           style: Theme.of(context).textTheme.headlineMedium,
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Enter your Zambian 10-digit phone number to continue',
+                          'Enter your phone number to access your health journey',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: AppTheme.darkGrey.withOpacity(0.7),
                           ),
@@ -192,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Don't have an account?",
+                              "New to YouthCare?",
                               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 color: AppTheme.darkGrey.withOpacity(0.7),
                               ),
@@ -202,9 +203,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.pushNamed(context, '/signup');
                               },
                               child: Text(
-                                'Sign Up',
+                                'Join Now',
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: AppTheme.primaryGreen,
+                                  color: AppTheme.primaryPurple,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -214,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         
                         const SizedBox(height: 16),
                         
-                        // Demo info
+                        // USSD info
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -229,13 +230,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               Row(
                                 children: [
                                   Icon(
-                                    Icons.info_outline,
+                                    Icons.phone_android,
                                     color: AppTheme.secondaryBlue,
                                     size: 20,
                                   ),
                                   const SizedBox(width: 8),
                                   Text(
-                                    'Demo Mode',
+                                    'USSD Access',
                                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                       color: AppTheme.secondaryBlue,
                                       fontWeight: FontWeight.w600,
@@ -245,7 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Enter any 10-digit number to login. The app will use dummy data for demonstration.',
+                                'Dial *123# for basic phone access to health services, bookings, and vouchers.',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   color: AppTheme.secondaryBlue.withOpacity(0.8),
                                 ),
@@ -263,7 +264,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 
                 // Footer
                 Text(
-                  'Your health, our priority',
+                  'Your health journey starts here',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppTheme.darkGrey.withOpacity(0.6),
                   ),
