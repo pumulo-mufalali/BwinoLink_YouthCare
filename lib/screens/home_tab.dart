@@ -279,10 +279,7 @@ class HomeTab extends StatelessWidget {
                 Icons.calendar_today,
                 AppTheme.secondaryBlue,
                 () {
-                  // Navigate to booking
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Appointment booking coming soon!')),
-                  );
+                  Navigator.pushNamed(context, '/booking');
                 },
               ),
             ),
@@ -311,15 +308,29 @@ class HomeTab extends StatelessWidget {
                 Icons.lightbulb,
                 AppTheme.successGreen,
                 () {
-                  // Navigate to health tips
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Health tips coming soon!')),
-                  );
+                  Navigator.pushNamed(context, '/health-tips');
                 },
               ),
             ),
           ],
         ),
+        const SizedBox(height: 12),
+        if (appState.peerNavigatorAssignment != null)
+          Row(
+            children: [
+              Expanded(
+                child: _buildActionCard(
+                  context,
+                  'Chat with Peer Navigator',
+                  Icons.chat,
+                  AppTheme.primaryPurple,
+                  () {
+                    Navigator.pushNamed(context, '/peer-chat');
+                  },
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }
@@ -567,9 +578,7 @@ class HomeTab extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Contacting peer navigator...')),
-                    );
+                    Navigator.pushNamed(context, '/peer-chat');
                   },
                   icon: Icon(Icons.message, color: AppTheme.primaryPurple),
                 ),
