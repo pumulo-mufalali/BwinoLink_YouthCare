@@ -34,12 +34,12 @@ class ScreeningResultCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isAbnormal 
                           ? AppTheme.warningOrange.withOpacity(0.2)
-                          : AppTheme.accentGreen.withOpacity(0.2),
+                          : AppTheme.successGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(
                       isAbnormal ? Icons.warning : Icons.check_circle,
-                      color: isAbnormal ? AppTheme.warningOrange : AppTheme.accentGreen,
+                      color: isAbnormal ? AppTheme.warningOrange : AppTheme.successGreen,
                       size: 20,
                     ),
                   ),
@@ -61,7 +61,7 @@ class ScreeningResultCard extends StatelessWidget {
                         Text(
                           screening.status.toUpperCase(),
                           style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                            color: isAbnormal ? AppTheme.warningOrange : AppTheme.accentGreen,
+                            color: isAbnormal ? AppTheme.warningOrange : AppTheme.successGreen,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -88,19 +88,19 @@ class ScreeningResultCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isAbnormal 
                       ? AppTheme.warningOrange.withOpacity(0.1)
-                      : AppTheme.lightGreen.withOpacity(0.1),
+                      : AppTheme.lightPurple.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     color: isAbnormal 
                         ? AppTheme.warningOrange.withOpacity(0.3)
-                        : AppTheme.lightGreen.withOpacity(0.3),
+                        : AppTheme.lightPurple.withOpacity(0.3),
                   ),
                 ),
                 child: Row(
                   children: [
                     Icon(
                       Icons.science,
-                      color: isAbnormal ? AppTheme.warningOrange : AppTheme.primaryGreen,
+                      color: isAbnormal ? AppTheme.warningOrange : AppTheme.primaryPurple,
                       size: 20,
                     ),
                     const SizedBox(width: 8),
@@ -108,7 +108,7 @@ class ScreeningResultCard extends StatelessWidget {
                       child: Text(
                         screening.result,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: isAbnormal ? AppTheme.warningOrange : AppTheme.primaryGreen,
+                          color: isAbnormal ? AppTheme.warningOrange : AppTheme.primaryPurple,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -175,14 +175,14 @@ class ScreeningResultCard extends StatelessWidget {
                   Text(
                     'Tap to view details',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppTheme.primaryGreen,
+                      color: AppTheme.primaryPurple,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(width: 4),
                   Icon(
                     Icons.arrow_forward_ios,
-                    color: AppTheme.primaryGreen,
+                    color: AppTheme.primaryPurple,
                     size: 12,
                   ),
                 ],

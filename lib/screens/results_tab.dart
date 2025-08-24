@@ -50,14 +50,14 @@ class ResultsTab extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryGreen.withOpacity(0.2),
+                          color: AppTheme.primaryPurple.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
                           '${screenings.length} Results',
                           style:
                               Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: AppTheme.primaryGreen,
+                                    color: AppTheme.primaryPurple,
                                     fontWeight: FontWeight.w600,
                                   ),
                         ),
@@ -73,7 +73,7 @@ class ResultsTab extends StatelessWidget {
                           'Total',
                           '${screenings.length}',
                           Icons.medical_services,
-                          AppTheme.primaryGreen,
+                          AppTheme.primaryPurple,
                         ),
                       ),
                       Expanded(
@@ -82,7 +82,7 @@ class ResultsTab extends StatelessWidget {
                           'Normal',
                           '${screenings.where((s) => s.status == 'normal').length}',
                           Icons.check_circle,
-                          AppTheme.accentGreen,
+                          AppTheme.successGreen,
                         ),
                       ),
                       Expanded(
@@ -241,7 +241,7 @@ class _ResultDetailsSheet extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: screening.status == 'abnormal'
                               ? AppTheme.warningOrange.withOpacity(0.2)
-                              : AppTheme.accentGreen.withOpacity(0.2),
+                              : AppTheme.successGreen.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
@@ -250,7 +250,7 @@ class _ResultDetailsSheet extends StatelessWidget {
                               : Icons.check_circle,
                           color: screening.status == 'abnormal'
                               ? AppTheme.warningOrange
-                              : AppTheme.accentGreen,
+                              : AppTheme.successGreen,
                           size: 24,
                         ),
                       ),
@@ -277,7 +277,7 @@ class _ResultDetailsSheet extends StatelessWidget {
                                   ?.copyWith(
                                     color: screening.status == 'abnormal'
                                         ? AppTheme.warningOrange
-                                        : AppTheme.accentGreen,
+                                        : AppTheme.successGreen,
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),

@@ -29,7 +29,7 @@ class SettingsTab extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 40,
-                            backgroundColor: AppTheme.primaryGreen,
+                            backgroundColor: AppTheme.primaryPurple,
                             child: Text(
                               user.name.substring(0, 1).toUpperCase(),
                               style: Theme.of(context).textTheme.displaySmall?.copyWith(
@@ -46,7 +46,7 @@ class SettingsTab extends StatelessWidget {
                                 Text(
                                   user.name,
                                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                    color: AppTheme.primaryGreen,
+                                    color: AppTheme.primaryPurple,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -62,7 +62,7 @@ class SettingsTab extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: user.role == 'staff' 
                                         ? AppTheme.secondaryBlue 
-                                        : AppTheme.accentGreen,
+                                        : AppTheme.accentPink,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Text(
@@ -82,17 +82,17 @@ class SettingsTab extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: AppTheme.lightGreen.withOpacity(0.2),
+                          color: AppTheme.lightPurple.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: AppTheme.lightGreen.withOpacity(0.3),
+                            color: AppTheme.lightPurple.withOpacity(0.3),
                           ),
                         ),
                         child: Row(
                           children: [
                             Icon(
                               Icons.stars,
-                              color: AppTheme.primaryGreen,
+                              color: AppTheme.primaryPurple,
                               size: 24,
                             ),
                             const SizedBox(width: 12),
@@ -103,7 +103,7 @@ class SettingsTab extends StatelessWidget {
                                   Text(
                                     '${user.points} Points',
                                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                      color: AppTheme.primaryGreen,
+                                      color: AppTheme.primaryPurple,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -155,7 +155,7 @@ class SettingsTab extends StatelessWidget {
                               onPressed: () => appState.switchUserRole('user'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: user.role == 'user' 
-                                    ? AppTheme.primaryGreen 
+                                    ? AppTheme.primaryPurple 
                                     : AppTheme.lightGrey,
                                 foregroundColor: user.role == 'user' 
                                     ? AppTheme.white 
@@ -238,7 +238,7 @@ class SettingsTab extends StatelessWidget {
                       _buildSettingItem(
                         context,
                         icon: Icons.info,
-                        title: 'About AfyaLink',
+                        title: 'About BwinoLink YouthCare',
                         subtitle: 'App version and information',
                         onTap: () {
                           // TODO: Show about dialog
@@ -255,8 +255,13 @@ class SettingsTab extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => {
-                    appState.logout()
+                  onPressed: () {
+                    appState.logout();
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      '/login',
+                      (route) => false,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.errorRed,
@@ -285,7 +290,7 @@ class SettingsTab extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: AppTheme.primaryGreen,
+        color: AppTheme.primaryPurple,
         size: 24,
       ),
       title: Text(

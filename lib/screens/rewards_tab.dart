@@ -34,8 +34,8 @@ class RewardsTab extends StatelessWidget {
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                       colors: [
-                        AppTheme.primaryGreen,
-                        AppTheme.accentGreen,
+                                AppTheme.primaryPurple,
+        AppTheme.accentPink,
                       ],
                     ),
                     borderRadius: BorderRadius.circular(16),
@@ -103,7 +103,7 @@ class RewardsTab extends StatelessWidget {
                         'Health Screening',
                         'Get 50 points for each screening',
                         Icons.medical_services,
-                        AppTheme.primaryGreen,
+                        AppTheme.primaryPurple,
                       ),
                       const SizedBox(height: 12),
                       _buildEarningMethod(
@@ -119,7 +119,7 @@ class RewardsTab extends StatelessWidget {
                         'Health Tips Shared',
                         'Get 10 points for sharing health tips',
                         Icons.lightbulb,
-                        AppTheme.accentGreen,
+                        AppTheme.accentPink,
                       ),
                     ],
                   ),
@@ -142,13 +142,13 @@ class RewardsTab extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryGreen.withOpacity(0.2),
+                      color: AppTheme.primaryPurple.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
                       '${availableRewards.length} Available',
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppTheme.primaryGreen,
+                        color: AppTheme.primaryPurple,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -292,13 +292,13 @@ class RewardsTab extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: canAfford 
-                        ? AppTheme.primaryGreen.withOpacity(0.2)
+                        ? AppTheme.primaryPurple.withOpacity(0.2)
                         : AppTheme.lightGrey,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
                     Icons.card_giftcard,
-                    color: canAfford ? AppTheme.primaryGreen : AppTheme.darkGrey.withOpacity(0.5),
+                    color: canAfford ? AppTheme.primaryPurple : AppTheme.darkGrey.withOpacity(0.5),
                     size: 24,
                   ),
                 ),
@@ -330,14 +330,14 @@ class RewardsTab extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: canAfford 
-                            ? AppTheme.primaryGreen.withOpacity(0.2)
+                            ? AppTheme.primaryPurple.withOpacity(0.2)
                             : AppTheme.lightGrey,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
                         '${reward.pointsRequired} pts',
                         style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: canAfford ? AppTheme.primaryGreen : AppTheme.darkGrey.withOpacity(0.5),
+                          color: canAfford ? AppTheme.primaryPurple : AppTheme.darkGrey.withOpacity(0.5),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -347,7 +347,7 @@ class RewardsTab extends StatelessWidget {
                       Text(
                         'Available',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: AppTheme.accentGreen,
+                          color: AppTheme.accentPink,
                           fontWeight: FontWeight.w500,
                         ),
                       )
@@ -443,7 +443,7 @@ class RewardsTab extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Successfully redeemed ${reward.name}!'),
-        backgroundColor: AppTheme.accentGreen,
+        backgroundColor: AppTheme.accentPink,
         duration: const Duration(seconds: 3),
         action: SnackBarAction(
           label: 'View',

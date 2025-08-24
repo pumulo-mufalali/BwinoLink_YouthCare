@@ -15,7 +15,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
-  String _selectedRole = 'user';
+  String _selectedRole = 'youth';
   bool _isLoading = false;
 
   @override

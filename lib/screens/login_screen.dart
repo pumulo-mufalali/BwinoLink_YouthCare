@@ -68,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
+                  child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
@@ -78,11 +79,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 Column(
                   children: [
                     Container(
-                      width: 120,
-                      height: 120,
+                      width: 100,
+                      height: 100,
                       decoration: BoxDecoration(
                         color: AppTheme.primaryPurple,
-                        borderRadius: BorderRadius.circular(60),
+                        borderRadius: BorderRadius.circular(50),
                         boxShadow: [
                           BoxShadow(
                             color: AppTheme.primaryPurple.withOpacity(0.3),
@@ -91,11 +92,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-                      child: const Icon(
-                        Icons.favorite,
-                        size: 60,
-                        color: AppTheme.white,
-                      ),
+                                              child: const Icon(
+                          Icons.favorite,
+                          size: 50,
+                          color: AppTheme.white,
+                        ),
                     ),
                     const SizedBox(height: 24),
                     Text(
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 
-                const SizedBox(height: 48),
+                const SizedBox(height: 32),
                 
                 // Login form
                 Card(
@@ -260,7 +261,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
                 
                 // Footer
                 Text(
@@ -273,6 +274,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
           ),
+        ),
         ),
       ),
     );

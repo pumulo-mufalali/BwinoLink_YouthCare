@@ -88,7 +88,7 @@ class _AddScreeningScreenState extends State<AddScreeningScreen> {
         SnackBar(
           content: Text(
               'Screening recorded successfully for ${screening.patientName}'),
-          backgroundColor: AppTheme.primaryGreen,
+          backgroundColor: AppTheme.primaryPurple,
         ),
       );
 
@@ -301,7 +301,7 @@ class _AddScreeningScreenState extends State<AddScreeningScreen> {
                                 child: Row(
                                   children: [
                                     Icon(Icons.check_circle,
-                                        color: AppTheme.primaryGreen),
+                                        color: AppTheme.primaryPurple),
                                     const SizedBox(width: 8),
                                     const Text('Normal'),
                                   ],
@@ -385,7 +385,7 @@ class _AddScreeningScreenState extends State<AddScreeningScreen> {
                     child: ElevatedButton(
                       onPressed: _submitScreening,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.primaryGreen,
+                        backgroundColor: AppTheme.primaryPurple,
                         foregroundColor: AppTheme.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
