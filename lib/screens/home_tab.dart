@@ -199,7 +199,7 @@ class HomeTab extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Welcome back, ${appState.currentUser?.name ?? 'User'}!',
+                        'Welcome, ${appState.currentUser?.name ?? 'User'}!',
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -222,10 +222,13 @@ class HomeTab extends StatelessWidget {
                 Expanded(
                   child: _buildStatCard(
                     context,
-                    'Points',
-                    '${appState.currentUser?.points ?? 0}',
-                    Icons.stars,
+                    'Notifications',
+                    '${appState.currentUser?.notifications ?? 0}',
+                    Icons.notifications_active,
                     AppTheme.accentPink,
+                      () {
+                        Navigator.pushNamed(context, '/health-access-points');
+                      }
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -236,6 +239,9 @@ class HomeTab extends StatelessWidget {
                     '${appState.totalScreeningsCount}',
                     Icons.medical_services,
                     AppTheme.secondaryBlue,
+                          () {
+                        Navigator.pushNamed(context, '/health-access-points');
+                      }
                   ),
                 ),
               ],
@@ -638,7 +644,7 @@ class HomeTab extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: _buildStatCard(
+          child: _buildStatCardPlainText(
             context,
             'Total Screenings',
             '${appState.totalScreeningsCount}',
@@ -648,7 +654,7 @@ class HomeTab extends StatelessWidget {
         ),
         const SizedBox(width: 12),
         Expanded(
-          child: _buildStatCard(
+          child: _buildStatCardPlainText(
             context,
             'Abnormal Results',
             '${appState.abnormalResultsCount}',
@@ -753,31 +759,63 @@ class HomeTab extends StatelessWidget {
   }
 
   // Helper Widgets
-  Widget _buildStatCard(BuildContext context, String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard(BuildContext context, String title, String value, IconData icon, Color color, VoidCallback onTap) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Icon(icon, color: color, size: 32),
-            const SizedBox(height: 8),
-            Text(
-              value,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: color,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Icon(icon, color: color, size: 32),
+              const SizedBox(height: 8),
+              Text(
+                value,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
               ),
-            ),
-            Text(
-              title,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppTheme.darkGrey.withOpacity(0.7),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppTheme.darkGrey.withOpacity(0.7),
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  // Helper Widgets
+  Widget _buildStatCardPlainText(BuildContext context, String title, String value, IconData icon, Color color) {
+    return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Icon(icon, color: color, size: 32),
+              const SizedBox(height: 8),
+              Text(
+                value,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: color,
+                ),
+              ),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppTheme.darkGrey.withOpacity(0.7),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
     );
   }
 

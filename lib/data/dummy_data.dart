@@ -1,11 +1,9 @@
-// Enhanced data models for BwinoLink YouthCare
-// Supporting youth-focused health services, gamification, and community access points
-
 class UserProfile {
   final String name;
   final String phoneNumber;
   final String role; // 'youth', 'staff', 'peer_navigator', 'vendor'
   final int points;
+  final int notifications;
   final String profileImage;
   final int age;
   final String location;
@@ -17,6 +15,7 @@ class UserProfile {
     required this.phoneNumber,
     required this.role,
     required this.points,
+    this.notifications = 0,
     this.profileImage = '',
     this.age = 0,
     this.location = '',
@@ -157,6 +156,7 @@ class DummyData {
       phoneNumber: '0967839012',
       role: 'youth',
       points: 150,
+      notifications: 3,
       age: 19,
       location: 'Lusaka Market Area',
       interests: ['fitness', 'music', 'health'],
