@@ -110,6 +110,24 @@ class HomeTab extends StatelessWidget {
           _buildPeerNavigatorQuickActions(context, appState),
           const SizedBox(height: 24),
 
+          // View full dashboard button
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/peer-navigator');
+              },
+              icon: const Icon(Icons.dashboard),
+              label: const Text('View Full Dashboard'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.primaryPurple,
+                foregroundColor: AppTheme.white,
+                padding: const EdgeInsets.symmetric(vertical: 12),
+              ),
+            ),
+          ),
+          const SizedBox(height: 24),
+
           // Recent screenings
           _buildRecentScreenings(context, appState),
         ],
@@ -249,10 +267,7 @@ class HomeTab extends StatelessWidget {
                 Icons.location_on,
                 AppTheme.primaryPurple,
                 () {
-                  // Navigate to health access points
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Health services map coming soon!')),
-                  );
+                  Navigator.pushNamed(context, '/health-access-points');
                 },
               ),
             ),
@@ -685,11 +700,28 @@ class HomeTab extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Achievements',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Achievements',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/gamification');
+              },
+              child: Text(
+                'View All',
+                style: TextStyle(
+                  color: AppTheme.primaryPurple,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 16),
         GridView.builder(

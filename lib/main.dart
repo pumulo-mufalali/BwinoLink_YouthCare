@@ -7,6 +7,9 @@ import 'screens/login_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/add_screening_screen.dart';
+import 'screens/health_access_points_screen.dart';
+import 'screens/peer_navigator_screen.dart';
+import 'screens/gamification_screen.dart';
 
 void main() {
   runApp(const BwinoLinkApp());
@@ -29,6 +32,9 @@ class BwinoLinkApp extends StatelessWidget {
           '/login': (context) => const LoginScreen(),
           '/signup': (context) => const SignupScreen(),
           '/add-screening': (context) => const AddScreeningScreen(),
+          '/health-access-points': (context) => const HealthAccessPointsScreen(),
+          '/peer-navigator': (context) => const PeerNavigatorScreen(),
+          '/gamification': (context) => const GamificationScreen(),
         },
       ),
     );
