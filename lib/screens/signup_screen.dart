@@ -181,24 +181,21 @@ class _SignupScreenState extends State<SignupScreen> {
                           keyboardType: TextInputType.number,
                           maxLength: 10,
                           decoration: const InputDecoration(
-                            labelText: 'Phone Number',
-                            hintText: '0712345678',
+                            labelText: 'Password',
+                            hintText: 'Password',
                             prefixIcon: Icon(Icons.phone),
                             counterText: '',
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please enter your phone number';
+                              return 'Please enter your password';
                             }
                             if (value.length != 10) {
-                              return 'Phone number must be exactly 10 digits';
-                            }
-                            if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                              return 'Phone number must contain only digits';
+                              return 'Password must be at least 4 characters';
                             }
                             // Check if phone number already exists
                             if (DummyData.users.any((user) => user.phoneNumber == value)) {
-                              return 'Phone number already registered';
+                              return 'Password already registered';
                             }
                             return null;
                           },
@@ -225,10 +222,6 @@ class _SignupScreenState extends State<SignupScreen> {
                             DropdownMenuItem(
                               value: 'peer_navigator',
                               child: Text('Peer Navigator'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'vendor',
-                              child: Text('Market Vendor'),
                             ),
                           ],
                           onChanged: (value) {
