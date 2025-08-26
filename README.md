@@ -1,10 +1,10 @@
 # BwinoLink YouthCare; App Prototype
 
-A comprehensive Flutter-based mobile application that connects market health screenings to private phone follow-up, designed to improve health outcomes in market communities.
+A comprehensive Flutter-based mobile application that connects health screenings to private phone follow-up, designed to improve health outcomes in market communities.
 
-## 🏥 App Overview
+## App Overview
 
-AfyaLink Market is a mobile health application that bridges the gap between public health screenings at markets and personalized follow-up care. The app serves two main user types:
+BwinoLink is a mobile health application that bridges the gap between public health screenings at convenient locations and personalized follow-up care. The app serves two main user types:
 
 <p align="center">
   <img src="screenshots/dash.png" alt="Staff home page" width="250" height="500" />
