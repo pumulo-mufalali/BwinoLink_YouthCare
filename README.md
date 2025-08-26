@@ -1,4 +1,4 @@
-# AfyaLink Market - mHealth App Prototype
+# BwinoLink YouthCare; App Prototype
 
 A comprehensive Flutter-based mobile application that connects market health screenings to private phone follow-up, designed to improve health outcomes in market communities.
 
@@ -17,10 +17,9 @@ AfyaLink Market is a mobile health application that bridges the gap between publ
 ## Key Features
 
 ### Authentication & User Management
-- Phone number-based login system
-- Role-based access control (User/Staff)
+- Password-based login system
+- Role-based access control (User/Peer Navigator/Staff)
 - User profile management
-- Easy role switching for demonstration purposes
 
 ### Home Dashboard
 - Personalized welcome screen with user information
@@ -54,6 +53,7 @@ AfyaLink Market is a mobile health application that bridges the gap between publ
   - Cholesterol
   - Vision Test
   - Hearing Test
+  - HIV Test
 - Patient information management
 - Result status tracking (Normal/Abnormal/Pending)
 
@@ -194,4 +194,4 @@ For questions or support regarding this prototype, please refer to the project d
 
 ---
 
-**AfyaLink Market** - Connecting Health, Empowering Communities
+**BwinoLink YouthCare** - Connecting Health, Empowering Communities
