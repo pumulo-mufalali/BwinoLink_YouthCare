@@ -17,8 +17,6 @@ class HomeTab extends StatelessWidget {
           return _buildStaffDashboard(context, appState);
         } else if (appState.isPeerNavigator) {
           return _buildPeerNavigatorDashboard(context, appState);
-        } else if (appState.isVendor) {
-          return _buildVendorDashboard(context, appState);
         }
         return _buildDefaultDashboard(context, appState);
       },
@@ -129,28 +127,6 @@ class HomeTab extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Recent screenings
-          _buildRecentScreenings(context, appState),
-        ],
-      ),
-    );
-  }
-
-  // Vendor Dashboard
-  Widget _buildVendorDashboard(BuildContext context, AppState appState) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Welcome section
-          _buildWelcomeSection(context, appState),
-          const SizedBox(height: 24),
-
-          // Market health services
-          _buildMarketHealthServices(context, appState),
-          const SizedBox(height: 24),
-
-          // Recent screenings at market
           _buildRecentScreenings(context, appState),
         ],
       ),
