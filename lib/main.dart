@@ -1,3 +1,4 @@
+import 'package:bwino_link_youthcare/screens/results_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/app_state.dart';
@@ -36,6 +37,7 @@ class BwinoLinkApp extends StatelessWidget {
           '/signup': (context) => const SignupScreen(),
           '/add-screening': (context) => const AddScreeningScreen(),
           '/health-access-points': (context) => const HealthAccessPointsScreen(),
+          '/results-tab': (context) => const ResultsTab(),
           '/peer-navigator': (context) => const PeerNavigatorScreen(),
           '/gamification': (context) => const GamificationScreen(),
           '/booking': (context) => const BookingScreen(),

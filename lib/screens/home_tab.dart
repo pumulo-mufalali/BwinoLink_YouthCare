@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
 import '../theme/app_theme.dart';
 import '../data/dummy_data.dart';
+import 'results_tab.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -216,7 +217,7 @@ class HomeTab extends StatelessWidget {
                     Icons.medical_services,
                     AppTheme.secondaryBlue,
                           () {
-                        Navigator.pushNamed(context, '/health-access-points');
+                        Navigator.pushNamed(context, '/results-tab');
                       }
                   ),
                 ),

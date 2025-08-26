@@ -168,6 +168,22 @@ class SettingsTab extends StatelessWidget {
                           const SizedBox(width: 12),
                           Expanded(
                             child: ElevatedButton(
+                              onPressed: () => appState.switchUserRole('peer_navigator'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: user.role == 'peer_navigator'
+                                    ? AppTheme.successGreen
+                                    : AppTheme.lightGrey,
+                                foregroundColor: user.role == 'peer_navigator'
+                                    ? AppTheme.white
+                                    : AppTheme.darkGrey,
+                                padding: const EdgeInsets.symmetric(vertical: 16),
+                              ),
+                              child: const Text('Peer'),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: ElevatedButton(
                               onPressed: () => appState.switchUserRole('staff'),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: user.role == 'staff'
@@ -178,7 +194,7 @@ class SettingsTab extends StatelessWidget {
                                     : AppTheme.darkGrey,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                               ),
-                              child: const Text('Staff'),
+                              child: const Text('Worker'),
                             ),
                           ),
                         ],

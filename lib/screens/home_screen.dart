@@ -94,13 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
         const RewardsTab(),
         const SettingsTab(),
       ];
-    } else if (appState.isVendor) {
-      return [
-        const HomeTab(),
-        const ResultsTab(),
-        const RewardsTab(),
-        const SettingsTab(),
-      ];
     }
     return [
       const HomeTab(),
@@ -165,13 +158,6 @@ class _HomeScreenState extends State<HomeScreen> {
         Icons.card_giftcard,
         Icons.person,
       ];
-    } else if (appState.isVendor) {
-      return [
-        Icons.store,
-        Icons.medical_services,
-        Icons.card_giftcard,
-        Icons.settings,
-      ];
     }
     return [
       Icons.home,
@@ -190,8 +176,6 @@ class _HomeScreenState extends State<HomeScreen> {
         return AppTheme.secondaryBlue;
       case 'peer_navigator':
         return AppTheme.primaryPurple;
-      case 'vendor':
-        return AppTheme.successGreen;
       default:
         return AppTheme.primaryPurple;
     }
