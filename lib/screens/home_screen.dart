@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 'staff':
         return AppTheme.secondaryBlue;
       case 'peer_navigator':
-        return AppTheme.primaryPurple;
+        return AppTheme.successGreen;
       default:
         return AppTheme.primaryPurple;
     }

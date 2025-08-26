@@ -62,11 +62,17 @@ class SettingsTab extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: user.role == 'staff' 
                                         ? AppTheme.secondaryBlue 
+                                        : user.role == 'peer_navigator'
+                                        ? AppTheme.successGreen
                                         : AppTheme.accentPink,
                                     borderRadius: BorderRadius.circular(20),
                                   ),
                                   child: Text(
-                                    user.role == 'staff' ? 'Staff' : 'User',
+                                    user.role == 'staff'
+                                        ? 'Health Worker'
+                                        : user.role == 'peer_navigator'
+                                        ? 'Peer Navigator'
+                                        : 'Youth',
                                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                                       color: AppTheme.white,
                                       fontWeight: FontWeight.w600,
@@ -152,17 +158,17 @@ class SettingsTab extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () => appState.switchUserRole('user'),
+                              onPressed: () => appState.switchUserRole('youth'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: user.role == 'user' 
-                                    ? AppTheme.primaryPurple 
+                                backgroundColor: user.role == 'youth'
+                                    ? AppTheme.accentPink
                                     : AppTheme.lightGrey,
-                                foregroundColor: user.role == 'user' 
+                                foregroundColor: user.role == 'youth'
                                     ? AppTheme.white 
                                     : AppTheme.darkGrey,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                               ),
-                              child: const Text('User'),
+                              child: const Text('Youth'),
                             ),
                           ),
                           const SizedBox(width: 12),

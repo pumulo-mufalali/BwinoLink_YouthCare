@@ -166,9 +166,9 @@ class AppState extends ChangeNotifier {
 
   // Switch user role (for demo purposes)
   void switchUserRole(String role) {
-    final user = DummyData.getUserByRole(role);
-    if (user != null) {
-      _currentUser = user;
+    final currentUser = DummyData.getUserByRole(role);
+    if (currentUser != null) {
+      _currentUser = currentUser;
       _loadUserData();
       notifyListeners();
     }
