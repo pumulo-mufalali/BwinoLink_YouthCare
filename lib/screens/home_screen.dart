@@ -133,13 +133,6 @@ class _HomeScreenState extends State<HomeScreen> {
         'Rewards',
         'Profile',
       ];
-    } else if (appState.isVendor) {
-      return [
-        'Market Health',
-        'Results',
-        'Rewards',
-        'Settings',
-      ];
     }
     return [
       'Home',

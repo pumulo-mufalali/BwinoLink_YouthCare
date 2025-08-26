@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Health where you are — markets & youth spaces connected to clinics privately.',
+                        'Health where you are; markets & youth spaces connected to clinics privately.',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: AppTheme.darkGrey.withOpacity(0.7),
                             ),
@@ -156,8 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your password';
                               }
-                              if (value.length != 4) {
-                                return 'Password must be exactly 4 characters';
+                              if (value.length <= 3) {
+                                return 'Password must be 4 or more characters';
                               }
                               return null;
                             },
