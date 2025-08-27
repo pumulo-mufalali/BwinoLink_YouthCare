@@ -203,9 +203,11 @@ class HomeTab extends StatelessWidget {
                     '${appState.currentUser?.notifications ?? 0}',
                     Icons.notifications_active,
                     AppTheme.accentPink,
-                      () {
-                        Navigator.pushNamed(context, '/health-access-points');
-                      }
+                        () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Notifications coming soon!')),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(width: 12),
