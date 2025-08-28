@@ -85,6 +85,9 @@ class HomeTab extends StatelessWidget {
 
           // Health access points
           _buildHealthAccessPoints(context, appState),
+
+          // Achievements
+          _buildAchievementsSection(context, appState),
         ],
       ),
     );
@@ -171,7 +174,7 @@ class HomeTab extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                appState.isStaff || appState.isYouth
+                appState.isStaff
                     ? Expanded(
                         child: _buildStatCard(
                           context,
@@ -179,14 +182,29 @@ class HomeTab extends StatelessWidget {
                           '2',
                           Icons.medical_services,
                           AppTheme.successGreen,
-                              () {
+                          () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Schedule coming soon!')),
+                              const SnackBar(
+                                  content: Text('Schedule coming soon!')),
                             );
                           },
                         ),
                       )
-                    : SizedBox(),
+                    : Expanded(
+                        child: _buildStatCard(
+                          context,
+                          appState.isYouth ? 'Total Screenings' : 'Today Schedule',
+                          '4',
+                          Icons.medical_services,
+                          AppTheme.successGreen,
+                          () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Schedule coming soon!')),
+                            );
+                          },
+                        ),
+                      )
               ],
             ),
           ],
@@ -312,12 +330,12 @@ class HomeTab extends StatelessWidget {
             Expanded(
               child: _buildActionCard(
                 context,
-                'View Reports',
-                Icons.analytics,
+                'Appointments',
+                Icons.calendar_month,
                 AppTheme.secondaryBlue,
                 () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Reports coming soon!')),
+                    const SnackBar(content: Text('Appointments coming soon!')),
                   );
                 },
               ),
@@ -601,7 +619,7 @@ class HomeTab extends StatelessWidget {
           child: _buildStatCardPlainText(
             context,
             'Total Screenings',
-            '${appState.totalScreeningsCount}',
+            '31',
             Icons.medical_services,
             AppTheme.primaryPurple,
           ),
@@ -611,7 +629,7 @@ class HomeTab extends StatelessWidget {
           child: _buildStatCardPlainText(
             context,
             'Abnormal Results',
-            '${appState.abnormalResultsCount}',
+            '9',
             Icons.warning,
             AppTheme.errorRed,
           ),

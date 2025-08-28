@@ -148,7 +148,7 @@ class SettingsTab extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Experience the app from different perspectives:',
+                        'This feature will be removed in production; For testing only...',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: AppTheme.darkGrey.withOpacity(0.7),
                         ),

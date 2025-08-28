@@ -1,6 +1,3 @@
-// Rewards tab for AfyaLink Market app
-// Displays user points and available rewards for redemption
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
@@ -90,6 +87,9 @@ class RewardsTab extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Achievements
+                      _buildAchievementsSection(context, appState),
+                      const SizedBox(height: 16),
                       Text(
                         'How to Earn Points',
                         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -455,4 +455,86 @@ class RewardsTab extends StatelessWidget {
       ),
     );
   }
+}
+
+// Achievements Section
+Widget _buildAchievementsSection(BuildContext context, AppState appState) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Achievements',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: Colors.green,
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/gamification');
+            },
+            child: Text(
+              'View All',
+              style: TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+        ],
+      ),
+      // const SizedBox(height: 16),
+      // GridView.builder(
+      //   shrinkWrap: true,
+      //   physics: const NeverScrollableScrollPhysics(),
+      //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      //     crossAxisCount: 2,
+      //     crossAxisSpacing: 12,
+      //     mainAxisSpacing: 12,
+      //     childAspectRatio: 1.2,
+      //   ),
+      //   itemCount: appState.userAchievements.length,
+      //   itemBuilder: (context, index) {
+      //     final achievement = appState.userAchievements[index];
+      //     return _buildAchievementCard(context, achievement);
+      //   },
+      // ),
+    ],
+  );
+}
+Widget _buildAchievementCard(BuildContext context, Achievement achievement) {
+  return Card(
+    child: Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            achievement.icon,
+            style: const TextStyle(fontSize: 32),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            achievement.name,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            '${achievement.pointsRewarded} pts',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppTheme.accentPink,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
