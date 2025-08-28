@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
 import '../theme/app_theme.dart';
 import '../data/dummy_data.dart';
-import 'results_tab.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -204,9 +203,7 @@ class HomeTab extends StatelessWidget {
                     Icons.notifications_active,
                     AppTheme.accentPink,
                         () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Notifications coming soon!')),
-                      );
+                      Navigator.pushNamed(context, '/notifications');
                     },
                   ),
                 ),
@@ -214,13 +211,13 @@ class HomeTab extends StatelessWidget {
                 Expanded(
                   child: _buildStatCard(
                     context,
-                    'Screenings',
+                    appState.isYouth ? 'Screenings' : 'Total Screenings',
                     '${appState.totalScreeningsCount}',
                     Icons.medical_services,
                     AppTheme.secondaryBlue,
-                          () {
-                        Navigator.pushNamed(context, '/results-tab');
-                      }
+                        () {
+                      Navigator.pushNamed(context, '/results-tab');
+                    },
                   ),
                 ),
               ],
@@ -294,6 +291,23 @@ class HomeTab extends StatelessWidget {
                 AppTheme.successGreen,
                 () {
                   Navigator.pushNamed(context, '/health-tips');
+                },
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildActionCard(
+                context,
+                'Chat with a Doctor',
+                Icons.medical_services,
+                AppTheme.secondaryBlue,
+                () {
+                  Navigator.pushNamed(context, '/health-worker-chat');
                 },
               ),
             ),

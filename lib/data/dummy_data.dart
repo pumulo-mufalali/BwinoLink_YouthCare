@@ -147,6 +147,69 @@ class Achievement {
   });
 }
 
+// New model for health worker profiles
+class HealthWorkerProfile {
+  final String id;
+  final String name;
+  final String phoneNumber;
+  final String specialization; // 'general', 'hiv_counselor', 'mental_health', 'sexual_health'
+  final String location;
+  final bool isOnline;
+  final String availability; // 'available', 'busy', 'offline'
+
+  HealthWorkerProfile({
+    required this.id,
+    required this.name,
+    required this.phoneNumber,
+    required this.specialization,
+    required this.location,
+    required this.isOnline,
+    required this.availability,
+  });
+}
+
+// New model for notifications
+class NotificationItem {
+  final String id;
+  final String title;
+  final String message;
+  final String type; // 'screening_result', 'reminder', 'achievement', 'message'
+  final DateTime timestamp;
+  final bool isRead;
+  final String relatedId;
+  final String action; // 'view_result', 'view_appointment', 'view_achievement', 'open_chat', 'view_tip'
+
+  NotificationItem({
+    required this.id,
+    required this.title,
+    required this.message,
+    required this.type,
+    required this.timestamp,
+    this.isRead = false,
+    required this.relatedId,
+    required this.action,
+  });
+}
+
+// New model for chat messages
+class HealthWorkerMessage {
+  final String id;
+  final String senderId;
+  final String receiverId;
+  final String message;
+  final DateTime timestamp;
+  final bool isRead;
+
+  HealthWorkerMessage({
+    required this.id,
+    required this.senderId,
+    required this.receiverId,
+    required this.message,
+    required this.timestamp,
+    this.isRead = false,
+  });
+}
+
 // Enhanced dummy data instances
 class DummyData {
   // Sample user profiles with youth focus
@@ -156,7 +219,7 @@ class DummyData {
       phoneNumber: '0967839012',
       role: 'youth',
       points: 150,
-      notifications: 3,
+      notifications: 2,
       age: 19,
       location: 'Lusaka Market Area',
       interests: ['fitness', 'music', 'health'],
@@ -166,7 +229,7 @@ class DummyData {
       phoneNumber: '0767839012',
       role: 'staff',
       points: 450,
-      notifications: 9,
+      notifications: 3,
       age: 35,
       location: 'Central Clinic',
     ),
@@ -426,6 +489,202 @@ class DummyData {
       description: 'Visit 3 different health access points',
       pointsRewarded: 75,
       icon: '🏪',
+    ),
+  ];
+
+  // Health worker profiles
+  static final List<HealthWorkerProfile> healthWorkers = [
+    HealthWorkerProfile(
+      id: '1',
+      name: 'Dr. Simataa Mutafela',
+      phoneNumber: '0767839012',
+      specialization: 'general',
+      location: 'Central Clinic',
+      isOnline: true,
+      availability: 'available',
+    ),
+    HealthWorkerProfile(
+      id: '2',
+      name: 'Dr. Vincent Kakula',
+      phoneNumber: '0976543210',
+      specialization: 'hiv_counselor',
+      location: 'Youth Center',
+      isOnline: true,
+      availability: 'available',
+    ),
+    HealthWorkerProfile(
+      id: '3',
+      name: 'Dr. Katiba Ngongo',
+      phoneNumber: '0961234567',
+      specialization: 'mental_health',
+      location: 'Mental Health Clinic',
+      isOnline: false,
+      availability: 'offline',
+    ),
+    HealthWorkerProfile(
+      id: '4',
+      name: 'Dr. Bupe Chilufya',
+      phoneNumber: '0959876543',
+      specialization: 'sexual_health',
+      location: 'Family Planning Clinic',
+      isOnline: true,
+      availability: 'busy',
+    ),
+  ];
+
+  // Sample notifications for youth
+  static final List<NotificationItem> youthNotifications = [
+    NotificationItem(
+      id: '1',
+      title: 'New Screening Result',
+      message: 'Your blood pressure screening result is ready. Tap to view.',
+      type: 'screening_result',
+      timestamp: DateTime.now().subtract(const Duration(hours: 2)),
+      isRead: false,
+      relatedId: '1',
+      action: 'view_result',
+    ),
+    NotificationItem(
+      id: '2',
+      title: 'Appointment Reminder',
+      message: 'You have a follow-up appointment tomorrow at 2:00 PM.',
+      type: 'reminder',
+      timestamp: DateTime.now().subtract(const Duration(hours: 6)),
+      isRead: false,
+      relatedId: 'appointment_1',
+      action: 'view_appointment',
+    ),
+    NotificationItem(
+      id: '3',
+      title: 'Achievement Unlocked!',
+      message: 'Congratulations! You\'ve earned the "First Screening" badge.',
+      type: 'achievement',
+      timestamp: DateTime.now().subtract(const Duration(days: 1)),
+      isRead: true,
+      relatedId: '1',
+      action: 'view_achievement',
+    ),
+    NotificationItem(
+      id: '4',
+      title: 'New Message',
+      message: 'Dr. Simataa sent you a message about your recent screening.',
+      type: 'message',
+      timestamp: DateTime.now().subtract(const Duration(days: 2)),
+      isRead: true,
+      relatedId: 'message_1',
+      action: 'open_chat',
+    ),
+    NotificationItem(
+      id: '5',
+      title: 'Health Tip',
+      message: 'Stay hydrated! Drink 8 glasses of water daily for better health.',
+      type: 'reminder',
+      timestamp: DateTime.now().subtract(const Duration(days: 3)),
+      isRead: true,
+      relatedId: 'view_tip',
+      action: 'view_tip',
+    ),
+  ];
+
+  // Sample notifications for peer navigators
+  static final List<NotificationItem> peerNavigatorNotifications = [
+    NotificationItem(
+      id: 'pn5',
+      title: 'Monthly Report Due',
+      message: 'Your monthly peer navigation report is due in 3 days.',
+      type: 'reminder',
+      timestamp: DateTime.now().subtract(const Duration(days: 4)),
+      isRead: false,
+      relatedId: 'monthly_report',
+      action: 'submit_report',
+    ),
+  ];
+
+  // Sample notifications for doctors/health workers
+  static final List<NotificationItem> doctorNotifications = [
+    NotificationItem(
+      id: 'dr2',
+      title: 'Abnormal Results Alert',
+      message: 'Blood sugar screening for Robert Chungu shows elevated levels.',
+      type: 'abnormal_result',
+      timestamp: DateTime.now().subtract(const Duration(hours: 4)),
+      isRead: false,
+      relatedId: 'screening_robert_1',
+      action: 'review_abnormal_result',
+    ),
+    NotificationItem(
+      id: 'dr3',
+      title: 'Follow-up Appointment',
+      message: 'Follow-up appointment scheduled for Carol Mwangala tomorrow.',
+      type: 'appointment',
+      timestamp: DateTime.now().subtract(const Duration(days: 1)),
+      isRead: false,
+      relatedId: 'appointment_carol_1',
+      action: 'view_appointment',
+    ),
+    NotificationItem(
+      id: 'dr5',
+      title: 'Weekly Summary',
+      message: 'Weekly screening summary: 15 screenings, 3 abnormal results.',
+      type: 'summary',
+      timestamp: DateTime.now().subtract(const Duration(days: 7)),
+      isRead: true,
+      relatedId: 'weekly_summary',
+      action: 'view_summary',
+    ),
+    NotificationItem(
+      id: 'dr6',
+      title: 'Equipment Maintenance',
+      message: 'Blood pressure monitor requires calibration. Schedule maintenance.',
+      type: 'reminder',
+      timestamp: DateTime.now().subtract(const Duration(days: 5)),
+      isRead: false,
+      relatedId: 'equipment_maintenance',
+      action: 'schedule_maintenance',
+    ),
+  ];
+
+  // Sample chat messages between youth and health workers
+  static final List<HealthWorkerMessage> healthWorkerMessages = [
+    HealthWorkerMessage(
+      id: '1',
+      senderId: '0767839012', // Dr. Simataa
+      receiverId: '0967839012', // Youth
+      message: 'Hi! I\'ve reviewed your recent blood pressure screening. The results look good, but I\'d like to schedule a follow-up in 2 weeks to monitor your progress.',
+      timestamp: DateTime.now().subtract(const Duration(hours: 3)),
+      isRead: true,
+    ),
+    HealthWorkerMessage(
+      id: '2',
+      senderId: '0967839012', // Youth
+      receiverId: '0767839012', // Dr. Simataa
+      message: 'Thank you, Dr. Simataa. That sounds good. What time would work best for you?',
+      timestamp: DateTime.now().subtract(const Duration(hours: 2, minutes: 30)),
+      isRead: true,
+    ),
+    HealthWorkerMessage(
+      id: '3',
+      senderId: '0767839012', // Dr. Simataa
+      receiverId: '0967839012', // Youth
+      message: 'I have availability on Tuesday and Thursday afternoons. Would Tuesday at 3:00 PM work for you?',
+      timestamp: DateTime.now().subtract(const Duration(hours: 2)),
+      isRead: true,
+    ),
+    HealthWorkerMessage(
+      id: '4',
+      senderId: '0967839012', // Youth
+      receiverId: '0767839012', // Dr. Simataa
+      message: 'Tuesday at 3:00 PM works perfectly. I\'ll see you then. Thank you!',
+      timestamp: DateTime.now().subtract(const Duration(hours: 1, minutes: 45)),
+      isRead: true,
+    ),
+    HealthWorkerMessage(
+      id: '5',
+      senderId: '0767839012', // Dr. Simataa
+      receiverId: '0967839012', // Youth
+      message: 'Great! I\'ve scheduled you for Tuesday at 3:00 PM. Don\'t forget to bring your health record book. See you soon!',
+      timestamp: DateTime.now().subtract(const Duration(hours: 1, minutes: 30)),
+      isRead: false,
     ),
   ];
 

@@ -478,7 +478,7 @@ class _BookingScreenState extends State<BookingScreen> {
           ),
         ),
         const SizedBox(height: 12),
-        ...bookings.map((booking) => _buildBookingCard(booking)).toList(),
+        ...bookings.map((booking) => _buildBookingCard(booking)),
       ],
     );
   }

@@ -34,6 +34,10 @@ class AppState extends ChangeNotifier {
   List<Achievement> _userAchievements = [];
   List<Achievement> get userAchievements => _userAchievements;
 
+  // Notifications for current user
+  List<NotificationItem> _userNotifications = [];
+  List<NotificationItem> get userNotifications => _userNotifications;
+
   // Constructor - initialize with default data
   AppState() {
     _initializeData();
@@ -99,6 +103,7 @@ class AppState extends ChangeNotifier {
       _loadHealthAccessPoints();
       _loadPeerNavigatorAssignment();
       _loadUserAchievements();
+      _loadUserNotifications();
     }
   }
 
@@ -148,6 +153,25 @@ class AppState extends ChangeNotifier {
   // Load user achievements
   void _loadUserAchievements() {
     _userAchievements = DummyData.getUserAchievements();
+  }
+
+  // Load user notifications
+  void _loadUserNotifications() {
+    if (_currentUser != null) {
+      switch (_currentUser!.role) {
+        case 'youth':
+          _userNotifications = DummyData.youthNotifications;
+          break;
+        case 'peer_navigator':
+          _userNotifications = DummyData.peerNavigatorNotifications;
+          break;
+        case 'staff':
+          _userNotifications = DummyData.doctorNotifications;
+          break;
+        default:
+          _userNotifications = [];
+      }
+    }
   }
 
   // Add new screening (for staff and peer navigators)
@@ -252,5 +276,51 @@ class AppState extends ChangeNotifier {
       default:
         return 'User';
     }
+  }
+
+  // Mark notification as read
+  void markNotificationAsRead(String notificationId) {
+    final notification = _userNotifications.firstWhere(
+      (n) => n.id == notificationId,
+      orElse: () => throw Exception('Notification not found'),
+    );
+    
+    // Create a new notification with isRead = true
+    final updatedNotification = NotificationItem(
+      id: notification.id,
+      title: notification.title,
+      message: notification.message,
+      type: notification.type,
+      timestamp: notification.timestamp,
+      isRead: true,
+      relatedId: notification.relatedId,
+      action: notification.action,
+    );
+    
+    // Replace the old notification
+    final index = _userNotifications.indexWhere((n) => n.id == notificationId);
+    if (index != -1) {
+      _userNotifications[index] = updatedNotification;
+      notifyListeners();
+    }
+  }
+
+  // Mark all notifications as read
+  void markAllNotificationsAsRead() {
+    for (int i = 0; i < _userNotifications.length; i++) {
+      final notification = _userNotifications[i];
+      final updatedNotification = NotificationItem(
+        id: notification.id,
+        title: notification.title,
+        message: notification.message,
+        type: notification.type,
+        timestamp: notification.timestamp,
+        isRead: true,
+        relatedId: notification.relatedId,
+        action: notification.action,
+      );
+      _userNotifications[i] = updatedNotification;
+    }
+    notifyListeners();
   }
 }

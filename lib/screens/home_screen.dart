@@ -30,6 +30,17 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             title: Text(tabTitles[appState.currentScreenIndex]),
             actions: [
+              // Notifications button
+              IconButton(
+                icon: Badge(
+                  label: Text('${appState.currentUser?.notifications ?? 0}'),
+                  child: const Icon(Icons.notifications),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/notifications');
+                },
+                tooltip: 'Notifications',
+              ),
               // User role indicator
               Container(
                 margin: const EdgeInsets.only(right: 16),

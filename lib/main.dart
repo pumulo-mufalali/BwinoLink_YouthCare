@@ -14,6 +14,8 @@ import 'screens/gamification_screen.dart';
 import 'screens/booking_screen.dart';
 import 'screens/health_tips_screen.dart';
 import 'screens/peer_chat_screen.dart';
+import 'screens/notifications_screen.dart';
+import 'screens/health_worker_chat_screen.dart';
 
 void main() {
   runApp(const BwinoLinkApp());
@@ -43,6 +45,8 @@ class BwinoLinkApp extends StatelessWidget {
           '/booking': (context) => const BookingScreen(),
           '/health-tips': (context) => const HealthTipsScreen(),
           '/peer-chat': (context) => const PeerChatScreen(),
+          '/notifications': (context) => const NotificationsScreen(),
+          '/health-worker-chat': (context) => const HealthWorkerChatScreen(),
         },
       ),
     );
