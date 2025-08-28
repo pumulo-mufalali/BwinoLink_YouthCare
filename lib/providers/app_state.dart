@@ -259,9 +259,6 @@ class AppState extends ChangeNotifier {
   // Check if user is peer navigator
   bool get isPeerNavigator => _currentUser?.role == 'peer_navigator';
 
-  // Check if user is vendor
-  bool get isVendor => _currentUser?.role == 'vendor';
-
   // Get user's role display name
   String get userRoleDisplayName {
     switch (_currentUser?.role) {

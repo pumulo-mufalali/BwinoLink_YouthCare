@@ -208,19 +208,6 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: const Icon(Icons.add),
         label: Text(appState.isStaff ? 'Add Screening' : 'Record Health'),
       );
-    } else if (appState.isVendor) {
-      return FloatingActionButton.extended(
-        onPressed: () {
-          // Navigate to market health services
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Market health services coming soon!'),
-            ),
-          );
-        },
-        icon: const Icon(Icons.health_and_safety),
-        label: const Text('Health Services'),
-      );
     }
     return null;
   }
