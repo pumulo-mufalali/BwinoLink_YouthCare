@@ -643,7 +643,7 @@ class _PeerNavigatorScreenState extends State<PeerNavigatorScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('${youth.name}\'s Health Record'),
+        title: Text('${youth.name}\'s Record'),
         content: const Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

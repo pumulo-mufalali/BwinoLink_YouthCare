@@ -127,7 +127,7 @@ class _PeerChatScreenState extends State<PeerChatScreen> {
                     'Peer Navigator',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey[600],
+                      color: Colors.grey[800],
                     ),
                   ),
                 ],

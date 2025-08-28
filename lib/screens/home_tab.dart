@@ -303,7 +303,7 @@ class HomeTab extends StatelessWidget {
               child: _buildActionCard(
                 context,
                 'Chat with a Doctor',
-                Icons.medical_services,
+                Icons.message,
                 AppTheme.secondaryBlue,
                 () {
                   Navigator.pushNamed(context, '/health-worker-chat');
@@ -602,10 +602,8 @@ class HomeTab extends StatelessWidget {
             subtitle: Text('${youth.age} years • ${youth.location}'),
             trailing: IconButton(
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Contacting ${youth.name}...')),
-                );
-              },
+                  Navigator.pushNamed(context, '/peer-chat');
+                  },
               icon: Icon(Icons.message, color: AppTheme.primaryPurple),
             ),
           ),

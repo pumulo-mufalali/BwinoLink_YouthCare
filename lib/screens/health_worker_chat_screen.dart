@@ -35,14 +35,8 @@ class _HealthWorkerChatScreenState extends State<HealthWorkerChatScreen> {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundColor: AppTheme.primaryPurple,
-              child: Text(
-                healthWorker.name.split(' ').map((n) => n[0]).join(''),
-                style: const TextStyle(
-                  color: AppTheme.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              backgroundColor: AppTheme.successGreen,
+              child: Icon(Icons.person, color: Colors.white,)
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -171,7 +165,7 @@ class _HealthWorkerChatScreenState extends State<HealthWorkerChatScreen> {
             if (!isFromCurrentUser) ...[
               CircleAvatar(
                 radius: 16,
-                backgroundColor: AppTheme.primaryPurple,
+                backgroundColor: AppTheme.successGreen,
                 child: Text(
                   healthWorker.name.split(' ').map((n) => n[0]).join(''),
                   style: const TextStyle(
