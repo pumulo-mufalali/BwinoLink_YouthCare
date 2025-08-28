@@ -17,12 +17,6 @@ class _PeerNavigatorScreenState extends State<PeerNavigatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Peer Navigator'),
-        backgroundColor: AppTheme.primaryPurple,
-        foregroundColor: AppTheme.white,
-        elevation: 0,
-      ),
       body: Consumer<AppState>(
         builder: (context, appState, child) {
           final user = appState.currentUser;
@@ -56,7 +50,7 @@ class _PeerNavigatorScreenState extends State<PeerNavigatorScreen> {
                           radius: 30,
                           backgroundColor: AppTheme.white.withOpacity(0.2),
                           child: Icon(
-                            Icons.people,
+                            Icons.person,
                             color: AppTheme.white,
                             size: 30,
                           ),
@@ -67,16 +61,10 @@ class _PeerNavigatorScreenState extends State<PeerNavigatorScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Peer Navigator',
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  color: AppTheme.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
                                 user.name,
                                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                                   color: AppTheme.white.withOpacity(0.9),
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],
@@ -418,8 +406,8 @@ class _PeerNavigatorScreenState extends State<PeerNavigatorScreen> {
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () => _showHealthRecordDialog(youth),
-                    icon: const Icon(Icons.health_and_safety),
-                    label: const Text('Health Record'),
+                    icon: const Icon(Icons.health_and_safety, color: Colors.white,),
+                    label: const Text('Records'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppTheme.primaryPurple,
                       foregroundColor: AppTheme.white,

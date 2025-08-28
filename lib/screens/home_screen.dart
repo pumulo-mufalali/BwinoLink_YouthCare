@@ -4,6 +4,7 @@ import '../providers/app_state.dart';
 import '../theme/app_theme.dart';
 import 'home_tab.dart';
 import 'results_tab.dart';
+import 'youth_assigned.dart';
 import 'rewards_tab.dart';
 import 'settings_tab.dart';
 import 'add_screening_screen.dart';
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (appState.isPeerNavigator) {
       return [
         const HomeTab(),
-        const ResultsTab(),
+        const YouthAssignedScreen(),
         const RewardsTab(),
         const SettingsTab(),
       ];
@@ -132,8 +133,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ];
     } else if (appState.isPeerNavigator) {
       return [
+        'Dashboard',
         'My Youth',
-        'Results',
         'Rewards',
         'Profile',
       ];
@@ -164,8 +165,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ];
     } else if (appState.isPeerNavigator) {
       return [
+        Icons.dashboard,
         Icons.people,
-        Icons.medical_services,
         Icons.card_giftcard,
         Icons.person,
       ];
@@ -194,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Get floating action button based on user role
   Widget? _getFloatingActionButton(AppState appState) {
-    if (appState.isStaff || appState.isPeerNavigator) {
+    if (appState.isStaff) {
       return FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(

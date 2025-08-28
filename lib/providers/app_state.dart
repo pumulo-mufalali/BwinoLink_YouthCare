@@ -271,8 +271,6 @@ class AppState extends ChangeNotifier {
         return 'Health Worker';
       case 'peer_navigator':
         return 'Peer Navigator';
-      case 'vendor':
-        return 'Market Vendor';
       default:
         return 'User';
     }

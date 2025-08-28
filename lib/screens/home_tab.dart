@@ -1,3 +1,4 @@
+import 'package:bwino_link_youthcare/screens/peer_navigator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
@@ -91,46 +92,7 @@ class HomeTab extends StatelessWidget {
 
   // Peer Navigator Dashboard
   Widget _buildPeerNavigatorDashboard(BuildContext context, AppState appState) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Welcome section
-          _buildWelcomeSection(context, appState),
-          const SizedBox(height: 24),
-
-          // Assigned youth
-          _buildAssignedYouthSection(context, appState),
-          const SizedBox(height: 24),
-
-          // Quick actions
-          _buildPeerNavigatorQuickActions(context, appState),
-          const SizedBox(height: 24),
-
-          // View full dashboard button
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushNamed(context, '/peer-navigator');
-              },
-              icon: const Icon(Icons.dashboard),
-              label: const Text('View Full Dashboard'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.primaryPurple,
-                foregroundColor: AppTheme.white,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-
-          // Recent screenings
-          _buildRecentScreenings(context, appState),
-        ],
-      ),
-    );
+    return PeerNavigatorScreen();
   }
 
   // Default Dashboard
@@ -164,9 +126,9 @@ class HomeTab extends StatelessWidget {
                   child: Text(
                     appState.currentUser?.name.substring(0, 1) ?? 'U',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: AppTheme.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                          color: AppTheme.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -176,16 +138,17 @@ class HomeTab extends StatelessWidget {
                     children: [
                       Text(
                         'Welcome, ${appState.currentUser?.name ?? 'User'}!',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Your health journey continues',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppTheme.darkGrey.withOpacity(0.7),
-                        ),
+                              color: AppTheme.darkGrey.withOpacity(0.7),
+                            ),
                       ),
                     ],
                   ),
@@ -201,25 +164,29 @@ class HomeTab extends StatelessWidget {
                     'Notifications',
                     '${appState.currentUser?.notifications ?? 0}',
                     Icons.notifications_active,
-                    AppTheme.accentPink,
-                        () {
+                    AppTheme.secondaryBlue,
+                    () {
                       Navigator.pushNamed(context, '/notifications');
                     },
                   ),
                 ),
                 const SizedBox(width: 12),
-                Expanded(
-                  child: _buildStatCard(
-                    context,
-                    appState.isYouth ? 'Screenings' : 'Total Screenings',
-                    '${appState.totalScreeningsCount}',
-                    Icons.medical_services,
-                    AppTheme.secondaryBlue,
-                        () {
-                      Navigator.pushNamed(context, '/results-tab');
-                    },
-                  ),
-                ),
+                appState.isStaff || appState.isYouth
+                    ? Expanded(
+                        child: _buildStatCard(
+                          context,
+                          appState.isYouth ? 'Screenings' : 'Today Schedule',
+                          '2',
+                          Icons.medical_services,
+                          AppTheme.successGreen,
+                              () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Schedule coming soon!')),
+                            );
+                          },
+                        ),
+                      )
+                    : SizedBox(),
               ],
             ),
           ],
@@ -236,8 +203,8 @@ class HomeTab extends StatelessWidget {
         Text(
           'Quick Actions',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         Row(
@@ -324,8 +291,8 @@ class HomeTab extends StatelessWidget {
         Text(
           'Quick Actions',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         Row(
@@ -362,15 +329,16 @@ class HomeTab extends StatelessWidget {
   }
 
   // Peer Navigator Quick Actions
-  Widget _buildPeerNavigatorQuickActions(BuildContext context, AppState appState) {
+  Widget _buildPeerNavigatorQuickActions(
+      BuildContext context, AppState appState) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Quick Actions',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         Row(
@@ -409,15 +377,15 @@ class HomeTab extends StatelessWidget {
   // Health Access Points
   Widget _buildHealthAccessPoints(BuildContext context, AppState appState) {
     final accessPoints = appState.getNearbyAccessPoints();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Health Access Points',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         ...accessPoints.map((point) => _buildAccessPointCard(context, point)),
@@ -433,8 +401,8 @@ class HomeTab extends StatelessWidget {
         Text(
           'Market Health Services',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         Card(
@@ -450,9 +418,10 @@ class HomeTab extends StatelessWidget {
                     Expanded(
                       child: Text(
                         'Lusaka Central Market',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                     ),
                   ],
@@ -461,8 +430,8 @@ class HomeTab extends StatelessWidget {
                 Text(
                   'Available Services:',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 Wrap(
@@ -472,17 +441,20 @@ class HomeTab extends StatelessWidget {
                     'Blood Sugar',
                     'HIV Self-Test',
                     'BMI',
-                  ].map((service) => Chip(
-                    label: Text(service),
-                    backgroundColor: AppTheme.lightPurple.withOpacity(0.2),
-                  )).toList(),
+                  ]
+                      .map((service) => Chip(
+                            label: Text(service),
+                            backgroundColor:
+                                AppTheme.lightPurple.withOpacity(0.2),
+                          ))
+                      .toList(),
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'Hours: Mon-Fri 8:00 AM - 4:00 PM',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppTheme.darkGrey.withOpacity(0.7),
-                  ),
+                        color: AppTheme.darkGrey.withOpacity(0.7),
+                      ),
                 ),
               ],
             ),
@@ -508,8 +480,8 @@ class HomeTab extends StatelessWidget {
         Text(
           'Your Peer Navigator',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         Card(
@@ -523,9 +495,9 @@ class HomeTab extends StatelessWidget {
                   child: Text(
                     peerNavigator.name.substring(0, 1),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: AppTheme.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                          color: AppTheme.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -535,24 +507,29 @@ class HomeTab extends StatelessWidget {
                     children: [
                       Text(
                         peerNavigator.name,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                       Text(
                         'Peer Navigator',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppTheme.darkGrey.withOpacity(0.7),
-                        ),
+                              color: AppTheme.darkGrey.withOpacity(0.7),
+                            ),
                       ),
                       const SizedBox(height: 8),
                       Wrap(
                         spacing: 4,
-                        children: assignment.supportAreas.map((area) => Chip(
-                          label: Text(area.replaceAll('_', ' ')),
-                          backgroundColor: AppTheme.lightPurple.withOpacity(0.2),
-                          labelStyle: Theme.of(context).textTheme.bodySmall,
-                        )).toList(),
+                        children: assignment.supportAreas
+                            .map((area) => Chip(
+                                  label: Text(area.replaceAll('_', ' ')),
+                                  backgroundColor:
+                                      AppTheme.lightPurple.withOpacity(0.2),
+                                  labelStyle:
+                                      Theme.of(context).textTheme.bodySmall,
+                                ))
+                            .toList(),
                       ),
                     ],
                   ),
@@ -573,10 +550,13 @@ class HomeTab extends StatelessWidget {
 
   // Assigned Youth Section
   Widget _buildAssignedYouthSection(BuildContext context, AppState appState) {
-    final assignedYouth = DummyData.users.where((user) => 
-      user.role == 'youth' && 
-      DummyData.getPeerNavigatorAssignment(user.phoneNumber)?.peerNavigatorId == appState.currentUser?.phoneNumber
-    ).toList();
+    final assignedYouth = DummyData.users
+        .where((user) =>
+            user.role == 'youth' &&
+            DummyData.getPeerNavigatorAssignment(user.phoneNumber)
+                    ?.peerNavigatorId ==
+                appState.currentUser?.phoneNumber)
+        .toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -584,30 +564,31 @@ class HomeTab extends StatelessWidget {
         Text(
           'Assigned Youth (${assignedYouth.length})',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         ...assignedYouth.map((youth) => Card(
-          margin: const EdgeInsets.only(bottom: 8),
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: AppTheme.accentPink,
-              child: Text(
-                youth.name.substring(0, 1),
-                style: const TextStyle(color: AppTheme.white, fontWeight: FontWeight.bold),
-              ),
-            ),
-            title: Text(youth.name),
-            subtitle: Text('${youth.age} years • ${youth.location}'),
-            trailing: IconButton(
-              onPressed: () {
-                  Navigator.pushNamed(context, '/peer-chat');
+              margin: const EdgeInsets.only(bottom: 8),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: AppTheme.accentPink,
+                  child: Text(
+                    youth.name.substring(0, 1),
+                    style: const TextStyle(
+                        color: AppTheme.white, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                title: Text(youth.name),
+                subtitle: Text('${youth.age} years • ${youth.location}'),
+                trailing: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/peer-chat');
                   },
-              icon: Icon(Icons.message, color: AppTheme.primaryPurple),
-            ),
-          ),
-        )),
+                  icon: Icon(Icons.message, color: AppTheme.primaryPurple),
+                ),
+              ),
+            )),
       ],
     );
   }
@@ -632,7 +613,7 @@ class HomeTab extends StatelessWidget {
             'Abnormal Results',
             '${appState.abnormalResultsCount}',
             Icons.warning,
-            AppTheme.warningOrange,
+            AppTheme.errorRed,
           ),
         ),
       ],
@@ -642,15 +623,15 @@ class HomeTab extends StatelessWidget {
   // Recent Screenings
   Widget _buildRecentScreenings(BuildContext context, AppState appState) {
     final recentScreenings = appState.userScreenings.take(3).toList();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Recent Screenings',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
         const SizedBox(height: 16),
         if (recentScreenings.isEmpty)
@@ -669,8 +650,8 @@ class HomeTab extends StatelessWidget {
                     Text(
                       'No screenings yet',
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: AppTheme.darkGrey.withOpacity(0.7),
-                      ),
+                            color: AppTheme.darkGrey.withOpacity(0.7),
+                          ),
                     ),
                   ],
                 ),
@@ -678,7 +659,8 @@ class HomeTab extends StatelessWidget {
             ),
           )
         else
-          ...recentScreenings.map((screening) => _buildScreeningCard(context, screening)),
+          ...recentScreenings
+              .map((screening) => _buildScreeningCard(context, screening)),
       ],
     );
   }
@@ -694,8 +676,8 @@ class HomeTab extends StatelessWidget {
             Text(
               'Achievements',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
             TextButton(
               onPressed: () {
@@ -732,7 +714,8 @@ class HomeTab extends StatelessWidget {
   }
 
   // Helper Widgets
-  Widget _buildStatCard(BuildContext context, String title, String value, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildStatCard(BuildContext context, String title, String value,
+      IconData icon, Color color, VoidCallback onTap) {
     return Card(
       child: InkWell(
         onTap: onTap,
@@ -745,15 +728,15 @@ class HomeTab extends StatelessWidget {
               Text(
                 value,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
               ),
               Text(
                 title,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppTheme.darkGrey.withOpacity(0.7),
-                ),
+                      color: AppTheme.darkGrey.withOpacity(0.7),
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -764,35 +747,37 @@ class HomeTab extends StatelessWidget {
   }
 
   // Helper Widgets
-  Widget _buildStatCardPlainText(BuildContext context, String title, String value, IconData icon, Color color) {
+  Widget _buildStatCardPlainText(BuildContext context, String title,
+      String value, IconData icon, Color color) {
     return Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Icon(icon, color: color, size: 32),
-              const SizedBox(height: 8),
-              Text(
-                value,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
-              ),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppTheme.darkGrey.withOpacity(0.7),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Icon(icon, color: color, size: 32),
+            const SizedBox(height: 8),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                  ),
+            ),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppTheme.darkGrey.withOpacity(0.7),
+                  ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
+      ),
     );
   }
 
-  Widget _buildActionCard(BuildContext context, String title, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildActionCard(BuildContext context, String title, IconData icon,
+      Color color, VoidCallback onTap) {
     return Card(
       child: InkWell(
         onTap: onTap,
@@ -806,8 +791,8 @@ class HomeTab extends StatelessWidget {
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+                      fontWeight: FontWeight.w600,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -833,11 +818,14 @@ class HomeTab extends StatelessWidget {
             const SizedBox(height: 4),
             Wrap(
               spacing: 4,
-              children: point.services.take(3).map((service) => Chip(
-                label: Text(service),
-                backgroundColor: AppTheme.lightPurple.withOpacity(0.2),
-                labelStyle: Theme.of(context).textTheme.bodySmall,
-              )).toList(),
+              children: point.services
+                  .take(3)
+                  .map((service) => Chip(
+                        label: Text(service),
+                        backgroundColor: AppTheme.lightPurple.withOpacity(0.2),
+                        labelStyle: Theme.of(context).textTheme.bodySmall,
+                      ))
+                  .toList(),
             ),
           ],
         ),
@@ -891,17 +879,17 @@ class HomeTab extends StatelessWidget {
             Text(
               achievement.name,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+                    fontWeight: FontWeight.bold,
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 4),
             Text(
               '${achievement.pointsRewarded} pts',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppTheme.accentPink,
-                fontWeight: FontWeight.w600,
-              ),
+                    color: AppTheme.accentPink,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
           ],
         ),
@@ -965,7 +953,7 @@ class HomeTab extends StatelessWidget {
   Widget _getStatusChip(String status) {
     Color color;
     String label;
-    
+
     switch (status) {
       case 'normal':
         color = AppTheme.successGreen;
