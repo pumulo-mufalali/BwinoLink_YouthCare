@@ -299,7 +299,6 @@ class HomeTab extends StatelessWidget {
         const SizedBox(height: 12),
         Row(
           children: [
-            const SizedBox(width: 12),
             Expanded(
               child: _buildActionCard(
                 context,
@@ -313,23 +312,6 @@ class HomeTab extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 12),
-        if (appState.peerNavigatorAssignment != null)
-          Row(
-            children: [
-              Expanded(
-                child: _buildActionCard(
-                  context,
-                  'Chat with Peer Navigator',
-                  Icons.chat,
-                  AppTheme.primaryPurple,
-                  () {
-                    Navigator.pushNamed(context, '/peer-chat');
-                  },
-                ),
-              ),
-            ],
-          ),
       ],
     );
   }
