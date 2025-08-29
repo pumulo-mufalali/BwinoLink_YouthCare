@@ -487,22 +487,6 @@ Widget _buildAchievementsSection(BuildContext context, AppState appState) {
           ),
         ],
       ),
-      // const SizedBox(height: 16),
-      // GridView.builder(
-      //   shrinkWrap: true,
-      //   physics: const NeverScrollableScrollPhysics(),
-      //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      //     crossAxisCount: 2,
-      //     crossAxisSpacing: 12,
-      //     mainAxisSpacing: 12,
-      //     childAspectRatio: 1.2,
-      //   ),
-      //   itemCount: appState.userAchievements.length,
-      //   itemBuilder: (context, index) {
-      //     final achievement = appState.userAchievements[index];
-      //     return _buildAchievementCard(context, achievement);
-      //   },
-      // ),
     ],
   );
 }
