@@ -1,197 +1,199 @@
-# BwinoLink YouthCare; App Prototype
+# VSLA Backend - Django REST API
 
-A comprehensive Flutter-based mobile application that connects health screenings to private phone follow-up, designed to improve health outcomes in market communities.
+A comprehensive Django backend for the VSLA (BwinoLink YouthCare) Flutter application, providing youth healthcare services including health screening, peer navigation, rewards system, and health access points.
 
-## App Overview
+## Features
 
-BwinoLink is a mobile health application that bridges the gap between public health screenings at convenient locations and personalized follow-up care. The app serves two main user types:
+- **User Management**: Youth, staff, peer navigator, and vendor roles
+- **Health Screening**: Comprehensive health screening results management
+- **Peer Navigation**: Support system for youth healthcare guidance
+- **Rewards System**: Gamified points and rewards for health engagement
+- **Health Access Points**: Market, school, youth center, and clinic locations
+- **Notifications**: Real-time notification system
+- **Chat System**: Communication between youth and health workers
+- **JWT Authentication**: Secure API access with token-based authentication
 
-<p align="center">
-  <img src="screenshots/dash.png" alt="Staff home page" width="250" height="500" />
-</p>
+## Technology Stack
 
-- **Users**: Can view their health screening results, track their health progress, and redeem rewards
-- **Health Staff**: Healthcare workers who conduct screenings and record results in the app
+- **Django 4.2.7**: Web framework
+- **Django REST Framework**: API development
+- **SQLite**: Database (can be configured for PostgreSQL)
+- **JWT**: Authentication tokens
+- **CORS**: Cross-origin resource sharing support
 
+## Project Structure
 
-## Key Features
-
-### Authentication & User Management
-- Password-based login system
-- Role-based access control (User/Peer Navigator/Staff)
-- User profile management
-
-### Home Dashboard
-- Personalized welcome screen with user information
-- Health statistics overview (total screenings, abnormal results)
-- Quick action buttons for common tasks
-- Points system display
-
-### Health Results Management
-- Comprehensive screening results display
-- Filtering by test type, status, and date
-- Detailed result information with notes
-- Abnormal result highlighting
-
-### Rewards System
-- Points-based reward redemption
-- Health-focused rewards (checkups, supplements, consultations)
-- Progress tracking towards reward goals
-
-### Settings & Configuration
-- User profile management
-- Role switching functionality
-- App settings and preferences
-- Logout functionality
-
-### Screening Management (Staff Only)
-- Add new health screenings
-- Multiple test types support:
-  - Blood Pressure
-  - Blood Sugar
-  - BMI
-  - Cholesterol
-  - Vision Test
-  - Hearing Test
-  - HIV Test
-- Patient information management
-- Result status tracking (Normal/Abnormal/Pending)
-
-## Technical Architecture
-
-### Frontend Framework
-- **Flutter**: Cross-platform mobile development
-- **Material Design 3**: Modern, accessible UI components
-- **Provider**: State management solution
-
-### App Structure
 ```
-lib/
-├── main.dart                 # App entry point
-├── providers/
-│   └── app_state.dart       # Global state management
-├── screens/
-│   ├── login_screen.dart    # Authentication screen
-│   ├── home_screen.dart     # Main navigation container
-│   ├── home_tab.dart        # Home dashboard
-│   ├── results_tab.dart     # Health results display
-│   ├── rewards_tab.dart     # Rewards management
-│   ├── settings_tab.dart    # User settings
-│   └── add_screening_screen.dart # New screening form
-├── widgets/
-│   └── screening_result_card.dart # Reusable result card
-├── theme/
-│   └── app_theme.dart       # App styling and theming
-└── data/
-    └── dummy_data.dart      # Sample data for demonstration
+vsla_backend/
+├── manage.py
+├── requirements.txt
+├── README.md
+├── vsla_backend/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── wsgi.py
+│   └── asgi.py
+├── users/
+│   ├── __init__.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── views.py
+│   ├── urls.py
+│   └── admin.py
+├── health_screening/
+│   ├── __init__.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── views.py
+│   ├── urls.py
+│   └── admin.py
+├── rewards/
+├── health_access/
+├── peer_navigation/
+├── notifications/
+└── chat/
 ```
 
-### State Management
-- **Provider Pattern**: Centralized state management
-- **User Authentication**: Login/logout state
-- **Role-based Access**: Different features for different user types
-- **Data Persistence**: Local data management (ready for backend integration)
+## Installation
 
-## Design Features
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd vsla_backend
+   ```
 
-### Color Scheme
-- **Primary Green**: Health and wellness focus
-- **Secondary Blue**: Trust and professionalism
-- **Accent Colors**: Supporting color palette
-- **Accessibility**: High contrast ratios for readability
+2. **Create a virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-### Typography
-- **Poppins Font**: Modern, clean, and highly readable
-- **Hierarchical Text**: Clear information hierarchy
-- **Responsive Design**: Adapts to different screen sizes
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### UI Components
-- **Material Design 3**: Latest design standards
-- **Card-based Layout**: Clean, organized information display
-- **Interactive Elements**: Touch-friendly buttons and forms
-- **Status Indicators**: Clear visual feedback for health status
+4. **Run migrations**
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
 
-## Getting Started
+5. **Create a superuser**
+   ```bash
+   python manage.py createsuperuser
+   ```
 
-### Prerequisites
-- Flutter SDK (3.6.1 or higher)
-- Dart SDK
-- Android Studio / VS Code
-- Android Emulator or physical device
+6. **Run the development server**
+   ```bash
+   python manage.py runserver
+   ```
 
-### Installation
-1. Clone the repository
-2. Navigate to the project directory
-3. Run `flutter pub get` to install dependencies
-4. Run `flutter run` to start the app
+## API Endpoints
 
-### Dependencies
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  provider: ^6.1.1
-  google_fonts: ^6.1.0
-  cupertino_icons: ^1.0.8
+### Authentication
+- `POST /api/v1/auth/register/` - User registration
+- `POST /api/v1/auth/login/` - User login
+- `POST /api/v1/auth/logout/` - User logout
+
+### User Management
+- `GET /api/v1/profile/` - Get user profile
+- `PUT /api/v1/profile/update/` - Update user profile
+- `POST /api/v1/profile/change-password/` - Change password
+- `GET /api/v1/points/` - Get user points
+- `POST /api/v1/points/` - Add points to user
+
+### Health Screening
+- `GET /api/v1/screenings/` - List screening results
+- `POST /api/v1/screenings/` - Create new screening
+- `GET /api/v1/screenings/<id>/` - Get screening details
+- `PUT /api/v1/screenings/<id>/` - Update screening
+- `GET /api/v1/screenings/abnormal/` - Get abnormal results
+- `GET /api/v1/screenings/statistics/` - Get screening statistics
+
+### Health Workers
+- `GET /api/v1/health-workers/` - List health workers
+- `GET /api/v1/health-workers/profile/` - Get health worker profile
+- `PUT /api/v1/health-workers/availability/` - Update availability
+
+## Models
+
+### UserProfile
+- Extended Django user model with VSLA-specific fields
+- Role-based access control (youth, staff, peer_navigator, vendor)
+- Points system for gamification
+- Location and interests tracking
+
+### ScreeningResult
+- Comprehensive health screening data
+- Support for multiple test types
+- Follow-up scheduling and instructions
+- Location tracking (market, school, youth center, clinic)
+
+### HealthWorkerProfile
+- Professional health worker information
+- Specialization and availability tracking
+- License and experience details
+
+## Security Features
+
+- JWT token authentication
+- Role-based permissions
+- CORS configuration for Flutter app
+- Input validation and sanitization
+- Secure password handling
+
+## Development
+
+### Adding New Apps
+1. Create app directory: `python manage.py startapp app_name`
+2. Add to INSTALLED_APPS in settings.py
+3. Include URLs in main urls.py
+4. Create models, serializers, views, and URLs
+
+### Database Changes
+1. Modify models in models.py
+2. Create migrations: `python manage.py makemigrations`
+3. Apply migrations: `python manage.py migrate`
+
+### Testing
+```bash
+python manage.py test
 ```
 
-## App Flow
+## Deployment
 
-### For Users
-1. **Login**: Enter phone number to access personal health data
-2. **View Results**: Check health screening results and history
-3. **Track Progress**: Monitor health improvements over time
-4. **Earn Points**: Participate in screenings to earn points
-5. **Redeem Rewards**: Use points for health-related benefits
+### Production Settings
+- Set `DEBUG = False`
+- Configure production database (PostgreSQL recommended)
+- Set secure `SECRET_KEY`
+- Configure static and media file serving
+- Set up proper CORS origins
 
-### For Health Staff
-1. **Login**: Access staff features with elevated permissions
-2. **Conduct Screenings**: Record new health screening results
-3. **Manage Data**: View and update screening information
-4. **Track Impact**: Monitor community health improvements
-5. **Support Follow-up**: Ensure proper care coordination
-
-## Future Enhancements
-
-### Backend Integration
-- **API Integration**: Connect to health information systems
-- **Data Synchronization**: Real-time data updates
-- **User Authentication**: Secure backend authentication
-- **Data Analytics**: Health trend analysis and reporting
-
-### Advanced Features
-- **Push Notifications**: Health reminders and updates
-- **Telemedicine Integration**: Video consultation capabilities
-- **Health Education**: Educational content and resources
-- **Community Features**: Peer support and sharing
-
-### Analytics & Reporting
-- **Health Metrics**: Population health analytics
-- **Trend Analysis**: Long-term health pattern recognition
-- **Reporting Tools**: Healthcare provider reports
-- **Data Export**: Secure data sharing capabilities
-
-## Testing
-
-The app includes comprehensive testing:
-- **Unit Tests**: Core functionality validation
-- **Widget Tests**: UI component testing
-- **Integration Tests**: End-to-end workflow testing
-
-Run tests with: `flutter test`
-
-## License
-
-This project is developed as a prototype for demonstration purposes.
+### Environment Variables
+Create a `.env` file for sensitive configuration:
+```
+SECRET_KEY=your-secret-key
+DEBUG=False
+ALLOWED_HOSTS=your-domain.com
+DATABASE_URL=postgresql://user:password@localhost/dbname
+```
 
 ## Contributing
 
-This is a prototype application. For production use, additional security, testing, and compliance measures would be required.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
 
 ## Support
 
-For questions or support regarding this prototype, please refer to the project documentation or contact the development team.
-
----
-
-**BwinoLink YouthCare** - Connecting Health, Empowering Communities
+For support and questions, please contact the development team or create an issue in the repository.
