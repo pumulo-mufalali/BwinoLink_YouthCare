@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-vsla-youth-healthcare-backend-2024'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -32,13 +32,13 @@ INSTALLED_APPS = [
     'django_filters',
     
     # Local apps
-    'users',
-    'health_screening',
-    'rewards',
-    'health_access',
-    'peer_navigation',
-    'notifications',
-    'chat',
+    'vsla_backend.users',
+    'vsla_backend.health_screening',
+    'vsla_backend.rewards',
+    'vsla_backend.health_access',
+    'vsla_backend.peer_navigation',
+    'vsla_backend.notifications',
+    'vsla_backend.chat',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +132,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "http://localhost:5000",
+    "http://127.0.0.1:5000",
 ]
+
+# For mobile and emulators during development
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True

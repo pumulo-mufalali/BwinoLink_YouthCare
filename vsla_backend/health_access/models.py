@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import UserProfile
+from vsla_backend.users.models import UserProfile
 
 
 class HealthAccessPoint(models.Model):

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import ScreeningResult, HealthWorkerProfile
-from users.serializers import UserProfileSerializer
+from vsla_backend.users.serializers import UserProfileSerializer
 
 
 class ScreeningResultSerializer(serializers.ModelSerializer):

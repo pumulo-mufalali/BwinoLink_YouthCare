@@ -155,7 +155,7 @@ def user_notifications_count(request):
     user = request.user
     return Response({
         'user_id': user.id,
-        'notifications': user.notifications
+        'notifications': user.notification_count
     })
 
 
@@ -167,5 +167,5 @@ def clear_notifications(request):
     user.clear_notifications()
     return Response({
         'message': 'Notifications cleared successfully',
-        'notifications': user.notifications
+        'notifications': user.notification_count
     })

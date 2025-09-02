@@ -1,10 +1,8 @@
 from django.db import models
-from users.models import UserProfile
+from vsla_backend.users.models import UserProfile
 
 
 class PeerNavigatorAssignment(models.Model):
-    """Peer navigator assignments for youth support"""
-    
     STATUS_CHOICES = [
         ('active', 'Active'),
         ('completed', 'Completed'),

@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import UserProfile
+from vsla_backend.users.models import UserProfile
 
 
 class NotificationItem(models.Model):
@@ -81,8 +81,8 @@ class NotificationItem(models.Model):
         self.is_read = True
         self.save(update_fields=['is_read'])
         # Update user's notification count
-        self.user.notifications = max(0, self.user.notifications - 1)
-        self.user.save(update_fields=['notifications'])
+        self.user.notification_count = max(0, self.user.notification_count - 1)
+        self.user.save(update_fields=['notification_count'])
     
     def is_scheduled(self):
         """Check if notification is scheduled for future delivery"""

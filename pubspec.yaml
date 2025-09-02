@@ -37,6 +37,8 @@ dependencies:
   
   # State management
   provider: ^6.1.1
+  http: ^1.2.2
+  shared_preferences: ^2.3.2
   
   # Google Fonts for Poppins
   google_fonts: ^6.1.0

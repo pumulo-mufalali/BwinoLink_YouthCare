@@ -8,13 +8,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('users.urls')),
-    path('api/v1/', include('health_screening.urls')),
-    path('api/v1/', include('rewards.urls')),
-    path('api/v1/', include('health_access.urls')),
-    path('api/v1/', include('peer_navigation.urls')),
-    path('api/v1/', include('notifications.urls')),
-    path('api/v1/', include('chat.urls')),
+    path('api/v1/', include('vsla_backend.users.urls')),
+    path('api/v1/', include('vsla_backend.health_screening.urls')),
 ]
 
 if settings.DEBUG:

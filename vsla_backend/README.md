@@ -28,7 +28,7 @@ A comprehensive Django backend for the VSLA (BwinoLink YouthCare) Flutter applic
 
 ```
 vsla_backend/
-├── manage.py
+├── manage.py 
 ├── requirements.txt
 ├── README.md
 ├── test_setup.py

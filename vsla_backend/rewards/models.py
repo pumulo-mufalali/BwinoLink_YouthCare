@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-from users.models import UserProfile
+from vsla_backend.users.models import UserProfile
 
 
 class RewardItem(models.Model):

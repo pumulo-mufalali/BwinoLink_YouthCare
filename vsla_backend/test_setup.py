@@ -23,7 +23,7 @@ def test_django_setup():
         print("✅ Django setup successful!")
         
         # Test imports
-        from users.models import UserProfile
+        from vsla_backend.users.models import UserProfile
         from health_screening.models import ScreeningResult, HealthWorkerProfile
         
         print("✅ Models imported successfully!")

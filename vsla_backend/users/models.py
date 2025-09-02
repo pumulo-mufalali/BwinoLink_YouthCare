@@ -20,7 +20,7 @@ class UserProfile(AbstractUser):
     phone_number = models.CharField(max_length=15, unique=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='youth')
     points = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    notifications = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    notification_count = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
     age = models.PositiveIntegerField(blank=True, null=True, validators=[MinValueValidator(0), MaxValueValidator(120)])
     location = models.CharField(max_length=200, blank=True)
@@ -59,10 +59,10 @@ class UserProfile(AbstractUser):
     
     def increment_notifications(self):
         """Increment notification count"""
-        self.notifications += 1
-        self.save(update_fields=['notifications'])
+        self.notification_count += 1
+        self.save(update_fields=['notification_count'])
     
     def clear_notifications(self):
         """Clear notification count"""
-        self.notifications = 0
-        self.save(update_fields=['notifications'])
+        self.notification_count = 0
+        self.save(update_fields=['notification_count'])

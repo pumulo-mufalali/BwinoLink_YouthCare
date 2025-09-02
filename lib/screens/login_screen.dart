@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
+import '../services/auth_service.dart';
 import '../theme/app_theme.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,11 +14,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _authService = AuthService();
   bool _isLoading = false;
 
   @override
   void dispose() {
     _phoneController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -29,12 +33,12 @@ class _LoginScreenState extends State<LoginScreen> {
       });
 
       try {
-        // Simulate network delay
-        await Future.delayed(const Duration(seconds: 1));
-
-        // Login using provider
+        final result = await _authService.login(
+          phoneNumber: _phoneController.text.trim(),
+          password: _passwordController.text,
+        );
         if (mounted) {
-          context.read<AppState>().login(_phoneController.text);
+          context.read<AppState>().login(result['user']['phone_number']);
         }
       } catch (e) {
         if (mounted) {
@@ -144,20 +148,39 @@ class _LoginScreenState extends State<LoginScreen> {
                           // Phone number input
                           TextFormField(
                             controller: _phoneController,
-                            keyboardType: TextInputType.number,
-                            maxLength: 10,
+                            keyboardType: TextInputType.phone,
+                            maxLength: 15,
+                            decoration: const InputDecoration(
+                              labelText: 'Phone number',
+                              hintText: 'e.g. 097XXXXXXXX',
+                              prefixIcon: Icon(Icons.phone),
+                              counterText: '',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your phone number';
+                              }
+                              return null;
+                            },
+                          ),
+
+                          const SizedBox(height: 12),
+
+                          // Password input
+                          TextFormField(
+                            controller: _passwordController,
+                            obscureText: true,
                             decoration: const InputDecoration(
                               labelText: 'Password',
                               hintText: 'Enter password',
                               prefixIcon: Icon(Icons.lock),
-                              counterText: '',
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your password';
                               }
-                              if (value.length <= 3) {
-                                return 'Password must be 4 or more characters';
+                              if (value.length < 4) {
+                                return 'Password must be at least 4 characters';
                               }
                               return null;
                             },
