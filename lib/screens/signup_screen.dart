@@ -190,7 +190,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your password';
                             }
-                            if (value.length != 10) {
+                            if (value.length >= 3) {
                               return 'Password must be at least 4 characters';
                             }
                             // Check if phone number already exists

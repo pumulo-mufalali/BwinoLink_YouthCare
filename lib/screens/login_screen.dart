@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/app_state.dart';
 import '../services/auth_service.dart';
 import '../theme/app_theme.dart';
+import '../data/dummy_data.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -160,6 +161,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your phone number';
                               }
+                              if (DummyData.users.any((user) => user.phoneNumber == value)) {
+                                return 'Phone number already registered';
+                              }
                               return null;
                             },
                           ),
@@ -179,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter your password';
                               }
-                              if (value.length < 4) {
+                              if (value.length >= 3) {
                                 return 'Password must be at least 4 characters';
                               }
                               return null;
